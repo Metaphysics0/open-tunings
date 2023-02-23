@@ -1,2 +1,21 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+  import { currentTuning } from '../stores';
+  import type { IMusicalNote } from '../types/note';
+  import Header from '../ui/Header.svelte';
+  import Note from '../ui/Note.svelte';
+
+  let curentTuningValue: IMusicalNote[];
+
+  currentTuning.subscribe((value) => {
+    curentTuningValue = value;
+  });
+</script>
+
+<main class="font-sans flex flex-col items-center">
+  <Header />
+  <section class="flex">
+    {#each curentTuningValue as note}
+      <Note {note} />
+    {/each}
+  </section>
+</main>
