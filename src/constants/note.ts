@@ -1,4 +1,4 @@
-import type { IMusicalNote } from '../types/note';
+import type { IMusicalNote, INoteItem } from '../types/note';
 
 export const musicalNotes = [
   'A',
@@ -29,4 +29,29 @@ export const musicalNotesWithFlatPreference = [
   'Ab'
 ] as const;
 
-export const STANDARD_TUNING: IMusicalNote[] = ['E', 'A', 'D', 'G', 'B', 'E'];
+export const STANDARD_TUNING: INoteItem[] = [
+  {
+    note: 'E',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'D',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'B',
+    octave: 3
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];

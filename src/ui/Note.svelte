@@ -1,14 +1,19 @@
 <script lang="ts">
-  import type { IMusicalNote } from '../types/note';
+  import { notePlayer } from '../services/NotePlayer';
+  import type { IMusicalNote, INoteItem } from '../types/note';
 
-  export let note: IMusicalNote;
+  export let noteItem: INoteItem;
+
+  function playSingleNote(): void {
+    notePlayer.play(noteItem.note, noteItem.octave);
+  }
 </script>
 
 <button
   class="bg-slate-2 rounded-xl p-3 w-fit mx-2 flex flex-col cursor-pointer"
-  on:click={() => alert('ahh')}
+  on:click={playSingleNote}
 >
   <p class="text-xl">
-    {note}
+    {noteItem.note}
   </p>
 </button>
