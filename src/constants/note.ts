@@ -1,0 +1,57 @@
+import type { IMusicalNote, INoteItem } from '../types/note';
+
+export const musicalNotes = [
+  'A',
+  'A#',
+  'B',
+  'C',
+  'C#',
+  'D',
+  'D#',
+  'E',
+  'F',
+  'F#',
+  'G',
+  'G#'
+] as const;
+export const musicalNotesWithFlatPreference = [
+  'A',
+  'Bb',
+  'B',
+  'C',
+  'Db',
+  'D',
+  'Eb',
+  'E',
+  'F',
+  'Gb',
+  'G',
+  'Ab'
+] as const;
+
+export const STANDARD_TUNING: INoteItem[] = [
+  {
+    note: 'E',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'D',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'B',
+    octave: 3
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];
