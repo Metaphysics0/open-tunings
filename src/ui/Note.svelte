@@ -1,11 +1,11 @@
 <script lang="ts">
   import { notePlayer } from '../services/NotePlayer';
-  import type { IMusicalNote, INoteItem } from '../types/note';
+  import type { INoteItem } from '../types/note';
 
   export let noteItem: INoteItem;
 
   function playSingleNote(): void {
-    notePlayer.play(noteItem.note, noteItem.octave);
+    notePlayer.play(noteItem);
   }
 </script>
 

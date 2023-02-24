@@ -3,6 +3,7 @@
   import type { INoteItem } from '../types/note';
   import Header from '../ui/Header.svelte';
   import Note from '../ui/Note.svelte';
+  import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
 
   let currentTuningNotes: INoteItem[];
 
@@ -13,9 +14,10 @@
 
 <main class="font-sans flex flex-col items-center">
   <Header />
-  <section class="flex">
+  <section class="flex mb-3">
     {#each currentTuningNotes as noteItem}
       <Note {noteItem} />
     {/each}
   </section>
+  <PlayAllNotesButton />
 </main>
