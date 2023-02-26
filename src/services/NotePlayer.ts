@@ -6,37 +6,23 @@ class NotePlayer {
   sampler: Sampler | null;
   private readonly duration: string;
   private static readonly NOTES = [
-    'A1',
-    'A3',
-    'B1',
+    'A2',
+    'A4',
     'B2',
     'B3',
-    'D2',
+    'B4',
     'D3',
-    'E1',
-    'E3',
-    'G1',
+    'D4',
+    'E2',
+    'E4',
     'G2',
     'G3',
-    'G4'
+    'G4',
+    'G5'
   ];
   constructor() {
     this.duration = '8s';
-    this.sampler = !browser
-      ? null
-      : new Sampler(
-          Object.fromEntries(
-            NotePlayer.NOTES.map((note) => [
-              note,
-              `/instruments/electric-guitar/${note}.wav`
-            ])
-          ),
-          {
-            onload() {
-              console.log('Samples loaded!');
-            }
-          }
-        ).toDestination();
+    this.sampler = !browser ? null : this.noteSampler;
   }
 
   play(noteItem: INoteItem): void {
@@ -47,15 +33,31 @@ class NotePlayer {
     this.sampler.triggerAttackRelease(fullNote, this.duration);
   }
 
-  playMany(notes: INoteItem[]): void {
+  playMany(notes: INoteItem[], durationInMsBetweenEachNote = 550): void {
     if (!this.sampler) return;
     start();
 
     notes.forEach((note, idx) =>
       setTimeout(() => {
         this.play(note);
-      }, idx * 550)
+      }, idx * durationInMsBetweenEachNote)
     );
+  }
+
+  private get noteSampler(): Sampler {
+    return new Sampler(
+      Object.fromEntries(
+        NotePlayer.NOTES.map((note) => [
+          note,
+          `/instruments/electric-guitar/${note}.wav`
+        ])
+      ),
+      {
+        onload() {
+          console.log('Samples loaded!');
+        }
+      }
+    ).toDestination();
   }
 }
 

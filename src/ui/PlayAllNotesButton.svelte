@@ -11,7 +11,10 @@
   });
 
   function playAllNotes() {
-    notePlayer.playMany(currentTuningNotes);
+    notePlayer.playMany(currentTuningNotes, 550);
+    setTimeout(() => {
+      notePlayer.playMany(currentTuningNotes, 100);
+    }, 550 * currentTuningNotes.length + 550);
   }
 </script>
 
