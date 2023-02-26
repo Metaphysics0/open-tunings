@@ -1,6 +1,7 @@
-import { Sampler, start } from 'tone';
+import { Sampler, Sequence, start, Transport } from 'tone';
 import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
+import type { Time } from 'tone/build/esm/core/type/Units';
 
 class NotePlayer {
   sampler: Sampler | null;
@@ -21,27 +22,36 @@ class NotePlayer {
     'G5'
   ];
   constructor() {
-    this.duration = '8s';
+    this.duration = '2s';
     this.sampler = !browser ? null : this.noteSampler;
   }
 
-  play(noteItem: INoteItem): void {
+  play(noteItem: INoteItem, durationInMs?: Time): void {
     if (!this.sampler) return;
     start();
 
     const fullNote = noteItem.note + noteItem.octave;
-    this.sampler.triggerAttackRelease(fullNote, this.duration);
+    this.sampler.triggerAttackRelease(fullNote, durationInMs || this.duration);
   }
 
-  playMany(notes: INoteItem[], durationInMsBetweenEachNote = 550): void {
+  playMany(notes: INoteItem[]): void {
     if (!this.sampler) return;
-    start();
+    Transport.start();
+    this.getPlayAllNotesSequence(notes).start();
+  }
 
-    notes.forEach((note, idx) =>
-      setTimeout(() => {
-        this.play(note);
-      }, idx * durationInMsBetweenEachNote)
-    );
+  stop(): void {
+    Transport.stop();
+    Transport.cancel();
+  }
+
+  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
+    return new Sequence({
+      subdivision: '2t',
+      loop: false,
+      events: notes,
+      callback: (time, note) => this.play(note, '2ms')
+    });
   }
 
   private get noteSampler(): Sampler {

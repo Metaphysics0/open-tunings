@@ -1,3 +1,3 @@
-<header class="mb-3">
+<header class="mb-5">
   <h1 class="font-600 text-4xl">Open Tunings</h1>
 </header>

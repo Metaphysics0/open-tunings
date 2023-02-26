@@ -55,3 +55,5 @@ export const STANDARD_TUNING: INoteItem[] = [
     octave: 4
   }
 ];
+
+export const DEFAULT_TIME_BETWEEN_EACH_NOTE = 550;
