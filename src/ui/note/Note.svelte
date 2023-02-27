@@ -4,6 +4,7 @@
   import PitchShiftButton from './PitchShiftButton.svelte';
 
   export let noteItem: INoteItem;
+  export let index: number;
   let shouldShowOctave: boolean = false;
 
   function playSingleNote(): void {
@@ -17,7 +18,7 @@
   on:focus={() => (shouldShowOctave = true)}
   on:mouseleave={() => (shouldShowOctave = false)}
 >
-  <PitchShiftButton direction="up" />
+  <PitchShiftButton direction="up" indexOfNoteToPitchShift={index} />
   <button
     class="bg-slate-2 rounded-xl p-5 w-fit flex flex-col cursor-pointer"
     on:click={playSingleNote}
@@ -31,7 +32,7 @@
       {/if}
     </p>
   </button>
-  <PitchShiftButton direction="down" />
+  <PitchShiftButton direction="down" indexOfNoteToPitchShift={index} />
 </div>
 
 <style>
