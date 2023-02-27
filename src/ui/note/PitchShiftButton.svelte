@@ -2,12 +2,10 @@
   import FaAngleUp from 'svelte-icons/fa/FaAngleUp.svelte';
   import FaAngleDown from 'svelte-icons/fa/FaAngleDown.svelte';
   import { currentTuning } from '../../stores';
-  import type { INoteItem } from '../../types/note';
-  import { musicalNotes } from '../../constants/note';
+  import type { INoteItem, IPitchShiftDirection } from '../../types/note';
   import { pitchShiftNote } from '../../services/noteUtils';
 
-  type IDirection = 'up' | 'down';
-  export let direction: IDirection;
+  export let direction: IPitchShiftDirection;
   export let indexOfNoteToPitchShift: number;
 
   let currentTuningNotes: INoteItem[];

@@ -7,3 +7,5 @@ interface INoteItem {
   note: IMusicalNote;
   octave: IOctave;
 }
+
+type IPitchShiftDirection = 'up' | 'down';
