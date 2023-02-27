@@ -15,8 +15,8 @@
 <main class="font-sans flex flex-col items-center">
   <Header />
   <section class="flex mb-3">
-    {#each currentTuningNotes as noteItem}
-      <Note {noteItem} />
+    {#each currentTuningNotes as noteItem, index}
+      <Note {noteItem} {index} />
     {/each}
   </section>
   <PlayAllNotesButton />
