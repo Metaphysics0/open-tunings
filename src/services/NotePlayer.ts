@@ -36,6 +36,7 @@ class NotePlayer {
 
   playMany(notes: INoteItem[]): void {
     if (!this.sampler) return;
+    start();
     Transport.start();
     this.getPlayAllNotesSequence(notes).start();
   }

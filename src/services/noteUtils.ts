@@ -1,10 +1,18 @@
-import { musicalNotes } from '../constants/note';
+import { musicalNotes, STANDARD_TUNING } from '../constants/note';
 import type {
   IMusicalNote,
   INoteItem,
   IOctave,
   IPitchShiftDirection
 } from '../types/note';
+
+export function areArraysEqual(a1: unknown[], a2: unknown[]): boolean {
+  return JSON.stringify(a1) === JSON.stringify(a2);
+}
+
+export function isTuningCurrentlyInStandard(tuning: INoteItem[]): boolean {
+  return areArraysEqual(tuning, STANDARD_TUNING);
+}
 
 export function pitchShiftNote(
   noteItem: INoteItem,
