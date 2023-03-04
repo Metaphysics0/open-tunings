@@ -14,6 +14,7 @@
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
+		"@types/jsdom": "^21.1.0",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
 		"@typescript-eslint/parser": "^5.45.0",
 		"eslint": "^8.28.0",
@@ -30,6 +31,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"jsdom": "^21.1.0",
 		"svelte-icons": "^2.1.0",
 		"tone": "^14.7.77"
 	}
