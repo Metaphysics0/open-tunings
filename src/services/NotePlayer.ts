@@ -48,7 +48,7 @@ class NotePlayer {
 
   private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
     return new Sequence({
-      subdivision: '32n',
+      subdivision: '8n',
       loop: false,
       events: notes,
       callback: (time, note) => this.play(note, '2ms')

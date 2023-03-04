@@ -1,6 +1,7 @@
 <script lang="ts">
   import { currentTuning } from '../stores';
   import type { INoteItem } from '../types/note';
+  import Form from '../ui/form/Form.svelte';
   import FriendlyName from '../ui/FriendlyName.svelte';
   import Header from '../ui/Header.svelte';
   import Note from '../ui/note/Note.svelte';
