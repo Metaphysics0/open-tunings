@@ -36,6 +36,7 @@ class NotePlayer {
 
   playMany(notes: INoteItem[]): void {
     if (!this.sampler) return;
+    start();
     Transport.start();
     this.getPlayAllNotesSequence(notes).start();
   }
@@ -47,7 +48,7 @@ class NotePlayer {
 
   private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
     return new Sequence({
-      subdivision: '2t',
+      subdivision: '32n',
       loop: false,
       events: notes,
       callback: (time, note) => this.play(note, '2ms')

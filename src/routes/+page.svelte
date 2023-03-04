@@ -1,6 +1,7 @@
 <script lang="ts">
   import { currentTuning } from '../stores';
   import type { INoteItem } from '../types/note';
+  import FriendlyName from '../ui/FriendlyName.svelte';
   import Header from '../ui/Header.svelte';
   import Note from '../ui/note/Note.svelte';
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
@@ -14,6 +15,7 @@
 
 <main class="font-sans flex flex-col items-center">
   <Header />
+  <FriendlyName />
   <section class="flex mb-3">
     {#each currentTuningNotes as noteItem, index}
       <Note {noteItem} {index} />
