@@ -3,6 +3,7 @@
     commonOpenTunings,
     type IAvailableTuning
   } from '../constants/tunings';
+  import { apiService } from '../services/apiService';
   import { currentTuning } from '../stores';
   import type { IMusicalNote, INoteItem } from '../types/note';
   import { areArraysEqual } from '../utils';
@@ -33,16 +34,13 @@
   }
 
   async function fetchCurrentTuningName(notes: IMusicalNote[]): Promise<any> {
-    const response = await fetch('/api/chord-finder', {
-      method: 'POST',
-      body: JSON.stringify(notes),
-      headers: {
-        'content-type': 'application/json'
-      }
-    });
-    const data = await response.json();
-    console.log('DATA', data);
-    return 'asdf';
+    try {
+      const response = await apiService.chordFinder.find(notes);
+      const data = await response.json();
+      return data.chordName;
+    } catch (error) {
+      console.error('Error fetching tuning', error);
+    }
   }
 </script>
 
