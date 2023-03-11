@@ -13,7 +13,7 @@ export const apiService = {
     }
   },
   generator: {
-    generate(formData: FormData) {
+    generate(formData: Record<string, any>) {
       return fetch('/api/generator', {
         method: 'POST',
         headers: {

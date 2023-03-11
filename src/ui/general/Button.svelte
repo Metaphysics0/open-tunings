@@ -2,7 +2,6 @@
   export let icon: any;
   export let text: string;
   export let color: 'red' | 'blue' | 'slate' = 'red';
-  // export let onClick: (e: SubmitEvent) => Promise<void>;
 </script>
 
 <button

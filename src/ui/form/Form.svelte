@@ -13,11 +13,11 @@
   async function handleSubmit(e: SubmitEvent): Promise<void> {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const selectedMoods = availableMoods.filter((o, i) => selected[i]);
-
-    const formDataAsJson = Object.fromEntries(formData.entries());
-    console.log('formDataAsJson ', formDataAsJson);
-    // const response = await apiService.generator.generate();
+    const formDataAsJson = {
+      ...Object.fromEntries(formData.entries()),
+      selectedMoods: availableMoods.filter((o, i) => selected[i])
+    };
+    const response = await apiService.generator.generate(formDataAsJson);
   }
 </script>
 
@@ -29,8 +29,8 @@
   <h3 class="text-2xl font-bold mb-1">🧠 Generate a tuning!</h3>
   <hr class="h-px bg-gray-200 border-0 dark:bg-gray-700 mb-3" />
 
-  <div class="mb-3">
-    <p class="mb-1">
+  <div class="mb-5">
+    <p class="mb-2">
       1. What kind of mood are you going for? (select all that apply)
     </p>
     <div class="flex">
@@ -45,14 +45,14 @@
     </div>
   </div>
 
-  <div class="mb-3">
-    <p class="mb-1">
+  <div class="mb-5">
+    <p class="mb-2">
       2. What's the lowest you're willing to tune your 6th string to?
     </p>
     <Select />
   </div>
-  <div>
-    <p>3. How experimental do you want to go?</p>
+  <div class="mb-5">
+    <p class="mb-2">3. How experimental do you want to go?</p>
     <Range />
   </div>
 
