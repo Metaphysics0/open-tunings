@@ -1,7 +1,6 @@
 <script lang="ts">
   export let label: string;
   export let value: string = label;
-  export let index: number;
 
   export let checked = false;
 </script>

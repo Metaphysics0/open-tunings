@@ -35,12 +35,7 @@
     </p>
     <div class="flex">
       {#each availableMoods as mood, index}
-        <Checkbox
-          bind:checked={selected[index]}
-          label={mood}
-          value={mood}
-          {index}
-        />
+        <Checkbox bind:checked={selected[index]} label={mood} value={mood} />
       {/each}
     </div>
   </div>
