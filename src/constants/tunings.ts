@@ -2,8 +2,16 @@ import type { IMusicalNote } from '../types/note';
 
 export const commonOpenTunings: IAvailableTuning[] = [
   {
-    name: 'Standard Tuning',
+    name: 'E Standard',
     tuning: ['E', 'A', 'D', 'G', 'B', 'E']
+  },
+  {
+    name: 'D Standard',
+    tuning: ['D', 'G', 'C', 'F', 'A', 'D']
+  },
+  {
+    name: 'C Standard',
+    tuning: ['C', 'F', 'A#', 'D#', 'G', 'C']
   },
   {
     name: 'Rise F 😔✊',

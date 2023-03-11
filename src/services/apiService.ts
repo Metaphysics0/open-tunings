@@ -5,10 +5,21 @@ export const apiService = {
     find(notes: IMusicalNote[]) {
       return fetch('/api/chord-finder', {
         method: 'POST',
-        body: JSON.stringify(notes),
         headers: {
           'content-type': 'application/json'
-        }
+        },
+        body: JSON.stringify(notes)
+      });
+    }
+  },
+  generator: {
+    generate(formData: FormData) {
+      return fetch('/api/generator', {
+        method: 'POST',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify(formData)
       });
     }
   }

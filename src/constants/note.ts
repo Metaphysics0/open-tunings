@@ -1,4 +1,4 @@
-import type { IMusicalNote, INoteItem } from '../types/note';
+import type { INoteItem } from '../types/note';
 
 export const musicalNotes = [
   'A',
@@ -29,6 +29,7 @@ export const musicalNotesWithFlatPreference = [
   'Ab'
 ] as const;
 
+export const musicalOctaves = [0, 1, 2, 3, 4, 5, 6, 7] as const;
 export const STANDARD_TUNING: INoteItem[] = [
   {
     note: 'E',

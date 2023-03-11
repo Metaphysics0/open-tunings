@@ -5,6 +5,7 @@
   import Note from '../ui/note/Note.svelte';
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../ui/CurrentTuningName.svelte';
+  import Form from '../ui/form/Form.svelte';
 
   let currentTuningNotes: INoteItem[];
 
@@ -22,4 +23,6 @@
     {/each}
   </section>
   <PlayAllNotesButton />
+
+  <Form />
 </main>
