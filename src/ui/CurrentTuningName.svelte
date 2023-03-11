@@ -36,8 +36,8 @@
   async function fetchCurrentTuningName(notes: IMusicalNote[]): Promise<any> {
     try {
       const response = await apiService.chordFinder.find(notes);
-      const data = await response.json();
-      return data.chordName;
+      const data: IChordsLikeResponse = await response.json();
+      return data.chordNameAsHtml;
     } catch (error) {
       console.error('Error fetching tuning', error);
     }
@@ -46,5 +46,5 @@
 
 <div class="mb-5 mt-2 text-lg">
   Current tuning:
-  <span class="font-extrabold">{currentTuningName}</span>
+  <span class="font-extrabold">{@html currentTuningName}</span>
 </div>
