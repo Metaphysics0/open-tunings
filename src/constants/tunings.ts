@@ -18,6 +18,10 @@ export const commonOpenTunings: IAvailableTuning[] = [
     tuning: ['F', 'A', 'D', 'G', 'B', 'E']
   },
   {
+    name: 'American Football tuning',
+    tuning: ['F', 'A', 'C', 'G', 'C', 'E']
+  },
+  {
     name: '88 Pandas Tuning 🐼',
     tuning: ['C', 'G', 'D#', 'F', 'A#', 'D']
   },

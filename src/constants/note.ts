@@ -57,4 +57,31 @@ export const STANDARD_TUNING: INoteItem[] = [
   }
 ];
 
+export const AMERICAN_FOOTBALL_TUNING: INoteItem[] = [
+  {
+    note: 'F',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'C',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'C',
+    octave: 4
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];
+
 export const DEFAULT_TIME_BETWEEN_EACH_NOTE = 550;

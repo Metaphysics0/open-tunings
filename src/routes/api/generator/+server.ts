@@ -10,13 +10,9 @@ export const POST = (async ({ request }) => {
 
 // ~~~ Private ~~~
 async function generateTuningFromOpenAi(params?: any): Promise<any> {
-  const apiEndpoint =
-    'https://api.openai.com/v1/engines/davinci-codex/completions';
-  const prompt = `Can you generate an array that is an open tuning for the guitar, 
-  for example: ["C", "G", "B", "G", "B", "D"]
-  please use sharps instead of flats if relevant`;
+  const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
+  const prompt2 = `can you describe why the tuning for the guitar: ["C", "G", "B", "G", "B", "D"] sounds the way it does?`;
   const maxTokens = 20;
-  const temperature = 0.5;
 
   const response = await fetch(apiEndpoint, {
     method: 'POST',
@@ -25,15 +21,16 @@ async function generateTuningFromOpenAi(params?: any): Promise<any> {
       Authorization: `Bearer ${CHAT_GPT_SECRET}`
     },
     body: JSON.stringify({
-      prompt,
-      temperature,
+      model: 'gpt-3.5-turbo',
+      messages: [{ role: 'user', content: prompt2 }],
+      n: 1,
+      stop: '\n',
       max_tokens: maxTokens
     })
   });
 
   const data = await response.json();
-  console.log('DATA', data);
+  console.log('DATA', JSON.stringify(data, null, 2));
 
-  console.log('data', data.choices[0].text.trim().split(' '));
   return data;
 }

@@ -1,4 +1,4 @@
 import { writable } from 'svelte/store';
-import { STANDARD_TUNING } from './constants/note';
+import { AMERICAN_FOOTBALL_TUNING } from './constants/note';
 
-export const currentTuning = writable(STANDARD_TUNING);
+export const currentTuning = writable(AMERICAN_FOOTBALL_TUNING);
