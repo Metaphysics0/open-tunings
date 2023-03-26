@@ -5,6 +5,8 @@
   import Note from '../ui/note/Note.svelte';
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../ui/CurrentTuningName.svelte';
+  import TuningCard from '../ui/tuning-card/TuningCard.svelte';
+  import { sampleTunings } from '../constants/tunings';
 
   let currentTuningNotes: INoteItem[];
 
@@ -23,3 +25,9 @@
   </section>
   <PlayAllNotesButton />
 </main>
+
+<section class="font-sans flex">
+  {#each sampleTunings as sampleTuning}
+    <TuningCard tuning={sampleTuning} />
+  {/each}
+</section>

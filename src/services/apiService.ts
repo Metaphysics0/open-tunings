@@ -3,24 +3,38 @@ import type { IMusicalNote } from '../types/note';
 export const apiService = {
   chordFinder: {
     find(notes: IMusicalNote[]) {
-      return fetch('/api/chord-finder', {
+      return make({
+        endpoint: 'chord-finder',
         method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(notes)
+        params: notes
       });
     }
   },
   generator: {
-    generate(formData: Record<string, any>) {
-      return fetch('/api/generator', {
+    generate(formData: Record<string, unknown>) {
+      return make({
+        endpoint: 'generator',
         method: 'POST',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+        params: formData
       });
     }
   }
 };
+
+function make({
+  endpoint,
+  method,
+  params
+}: {
+  endpoint: string;
+  method: RequestInit['method'];
+  params: unknown;
+}): Promise<Response> {
+  return fetch(`/api/${endpoint}`, {
+    method,
+    headers: {
+      'content-type': 'application/json'
+    },
+    body: params ? JSON.stringify(params) : ''
+  });
+}

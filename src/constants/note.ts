@@ -30,58 +30,5 @@ export const musicalNotesWithFlatPreference = [
 ] as const;
 
 export const musicalOctaves = [0, 1, 2, 3, 4, 5, 6, 7] as const;
-export const STANDARD_TUNING: INoteItem[] = [
-  {
-    note: 'E',
-    octave: 2
-  },
-  {
-    note: 'A',
-    octave: 2
-  },
-  {
-    note: 'D',
-    octave: 3
-  },
-  {
-    note: 'G',
-    octave: 3
-  },
-  {
-    note: 'B',
-    octave: 3
-  },
-  {
-    note: 'E',
-    octave: 4
-  }
-];
-
-export const AMERICAN_FOOTBALL_TUNING: INoteItem[] = [
-  {
-    note: 'F',
-    octave: 2
-  },
-  {
-    note: 'A',
-    octave: 2
-  },
-  {
-    note: 'C',
-    octave: 3
-  },
-  {
-    note: 'G',
-    octave: 3
-  },
-  {
-    note: 'C',
-    octave: 4
-  },
-  {
-    note: 'E',
-    octave: 4
-  }
-];
 
 export const DEFAULT_TIME_BETWEEN_EACH_NOTE = 550;

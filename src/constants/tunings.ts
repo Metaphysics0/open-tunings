@@ -1,4 +1,4 @@
-import type { IMusicalNote } from '../types/note';
+import type { IMusicalNote, INoteItem } from '../types/note';
 
 export const commonOpenTunings: IAvailableTuning[] = [
   {
@@ -135,6 +135,147 @@ export const commonOpenTunings: IAvailableTuning[] = [
   }
 ];
 
+export const STANDARD_TUNING: INoteItem[] = [
+  {
+    note: 'E',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'D',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'B',
+    octave: 3
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];
+
+export const AMERICAN_FOOTBALL_TUNING: INoteItem[] = [
+  {
+    note: 'F',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'C',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'C',
+    octave: 4
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];
+
+export const SUPER_EMO_TUNING: INoteItem[] = [
+  {
+    note: 'C',
+    octave: 2
+  },
+  {
+    note: 'G',
+    octave: 2
+  },
+  {
+    note: 'D#',
+    octave: 3
+  },
+  {
+    note: 'F',
+    octave: 3
+  },
+  {
+    note: 'A#',
+    octave: 3
+  },
+  {
+    note: 'D',
+    octave: 4
+  }
+];
+
+export const HELLA_EMO: INoteItem[] = [
+  {
+    note: 'C',
+    octave: 2
+  },
+  {
+    note: 'G',
+    octave: 2
+  },
+  {
+    note: 'D',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'B',
+    octave: 3
+  },
+  {
+    note: 'D',
+    octave: 4
+  }
+];
+
+export const JUSTIN_PHILLIPS_TYPE_BEAT: INoteItem[] = [
+  {
+    note: 'D',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'E',
+    octave: 3
+  },
+  {
+    note: 'A',
+    octave: 3
+  },
+  {
+    note: 'C#',
+    octave: 3
+  },
+  {
+    note: 'E',
+    octave: 4
+  }
+];
+
+export const sampleTunings: INoteItem[][] = [
+  AMERICAN_FOOTBALL_TUNING,
+  SUPER_EMO_TUNING,
+  HELLA_EMO,
+  JUSTIN_PHILLIPS_TYPE_BEAT
+];
 export interface IAvailableTuning {
   name: string;
   tuning: IMusicalNote[];
