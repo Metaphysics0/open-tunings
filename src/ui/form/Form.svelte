@@ -17,7 +17,7 @@
       ...Object.fromEntries(formData.entries()),
       selectedMoods: availableMoods.filter((o, i) => selected[i])
     };
-    const response = await apiService.generator.generate(formDataAsJson);
+    // const response = await apiService.generator.generate(formDataAsJson);
   }
 </script>
 

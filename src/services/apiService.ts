@@ -9,15 +9,6 @@ export const apiService = {
         params: notes
       });
     }
-  },
-  generator: {
-    generate(formData: Record<string, unknown>) {
-      return make({
-        endpoint: 'generator',
-        method: 'POST',
-        params: formData
-      });
-    }
   }
 };
 
