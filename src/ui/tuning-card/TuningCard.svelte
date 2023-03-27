@@ -14,12 +14,14 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <article
   on:click={strum}
-  class="border-gray-900 rounded-lg p-4 border w-fit flex flex-col items-center mx-3"
+  class="border-gray-900 rounded-lg p-4 border flex flex-col items-center mx-auto w-5/6 cursor-pointer"
 >
-  <p class="text-xl font-medium mb-5">
+  <p class="text-xl font-medium p-4 mb-5 tracking-wide">
     {#each tuning as noteItem}
       {noteItem.note}
     {/each}
   </p>
-  <TuningFork size={25} />
+  <p class="mb-1">
+    <TuningFork size={35} />
+  </p>
 </article>

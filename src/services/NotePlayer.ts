@@ -28,8 +28,6 @@ class NotePlayer {
     this.context = this.noteContext;
 
     start();
-    // Context.
-    // Context.setContext()
   }
 
   play(noteItem: INoteItem, durationInMs?: Time): void {
@@ -42,6 +40,7 @@ class NotePlayer {
 
   playMany(notes: INoteItem[]): void {
     if (!this.sampler) return;
+    start();
     Transport.start();
     this.getPlayAllNotesSequence(notes).start();
   }

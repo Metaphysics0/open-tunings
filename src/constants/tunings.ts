@@ -270,11 +270,39 @@ export const JUSTIN_PHILLIPS_TYPE_BEAT: INoteItem[] = [
   }
 ];
 
+export const DADGAD: INoteItem[] = [
+  {
+    note: 'D',
+    octave: 2
+  },
+  {
+    note: 'A',
+    octave: 2
+  },
+  {
+    note: 'D',
+    octave: 3
+  },
+  {
+    note: 'G',
+    octave: 3
+  },
+  {
+    note: 'A',
+    octave: 3
+  },
+  {
+    note: 'D',
+    octave: 4
+  }
+];
+
 export const sampleTunings: INoteItem[][] = [
   AMERICAN_FOOTBALL_TUNING,
   SUPER_EMO_TUNING,
   HELLA_EMO,
-  JUSTIN_PHILLIPS_TYPE_BEAT
+  JUSTIN_PHILLIPS_TYPE_BEAT,
+  DADGAD
 ];
 export interface IAvailableTuning {
   name: string;
