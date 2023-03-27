@@ -2,6 +2,7 @@
   import { notePlayer } from '../../services/NotePlayer';
   import type { INoteItem } from '../../types/note';
   import PitchShiftButton from './PitchShiftButton.svelte';
+  import { fade } from 'svelte/transition';
 
   export let noteItem: INoteItem;
   export let index: number;
@@ -26,7 +27,7 @@
     <p class="relative text-3xl font-extrabold">
       {noteItem.note}
       {#if shouldShowOctave}
-        <span class="absolute block opacity-30">
+        <span class="absolute block opacity-30" transition:fade>
           {noteItem.octave}
         </span>
       {/if}
