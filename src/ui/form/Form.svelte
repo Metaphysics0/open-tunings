@@ -5,7 +5,6 @@
   import FaRandom from 'svelte-icons/fa/FaRandom.svelte';
   import { availableMoods } from '../../constants/form';
   import Select from './Select.svelte';
-  import { apiService } from '../../services/apiService';
 
   // Needed for multiple checkboxes
   let selected = availableMoods.map(() => false);
@@ -17,7 +16,7 @@
       ...Object.fromEntries(formData.entries()),
       selectedMoods: availableMoods.filter((o, i) => selected[i])
     };
-    // const response = await apiService.generator.generate(formDataAsJson);
+    // Connect chatGPT here
   }
 </script>
 
