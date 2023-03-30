@@ -24,7 +24,6 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-
 <div class="mx-auto w-5/6 mb-3">
   <article
     on:click={strumAndSetCurrentTuning}

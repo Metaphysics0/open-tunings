@@ -8,4 +8,10 @@ interface INoteItem {
   octave: IOctave;
 }
 
+interface IUserTuning {
+  name: string;
+  tags?: string[];
+  tuning: INoteItem[];
+}
+
 type IPitchShiftDirection = 'up' | 'down';

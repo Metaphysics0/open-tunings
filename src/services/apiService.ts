@@ -9,6 +9,21 @@ export const apiService = {
         params: notes
       });
     }
+  },
+  userTunings: {
+    get() {
+      return make({
+        endpoint: 'user-tunings',
+        method: 'GET'
+      });
+    },
+    create(params: unknown) {
+      return make({
+        endpoint: 'user-tunings',
+        method: 'POST',
+        params
+      });
+    }
   }
 };
 
@@ -18,14 +33,14 @@ function make({
   params
 }: {
   endpoint: string;
-  method: RequestInit['method'];
-  params: unknown;
+  method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';
+  params?: unknown;
 }): Promise<Response> {
   return fetch(`/api/${endpoint}`, {
     method,
     headers: {
       'content-type': 'application/json'
     },
-    body: params ? JSON.stringify(params) : ''
+    body: params ? JSON.stringify(params) : null
   });
 }

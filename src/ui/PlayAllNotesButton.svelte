@@ -21,6 +21,6 @@
 >
   <span class="block h-5 flex">
     <FaGuitar />
-    <span class="ml-1 font-bold tracking-wide"> STRUM </span>
+    <span class="ml-1 font-bold tracking-wider">Strum!</span>
   </span>
 </button>
