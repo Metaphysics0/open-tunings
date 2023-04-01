@@ -1,16 +1,12 @@
 <script lang="ts">
-  import { AMERICAN_FOOTBALL_TUNING } from '../../constants/tunings';
   import { notePlayer } from '../../services/NotePlayer';
   import { currentTuning } from '../../stores';
-  import type { INoteItem, IUserSubmittedTuning } from '../../types/note';
+  import type { IUserSubmittedTuning } from '../../types/note';
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
 
-  export let tuning: IUserSubmittedTuning = {
-    name: 'some name',
-    tuning: AMERICAN_FOOTBALL_TUNING
-  };
+  export let tuning: IUserSubmittedTuning;
 
   function strum(): void {
     notePlayer.playMany(tuning.tuning);

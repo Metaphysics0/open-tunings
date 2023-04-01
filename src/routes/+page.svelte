@@ -8,12 +8,12 @@
   import TuningsList from '../ui/tunings-list/TuningsList.svelte';
   import type { PageData } from './$types';
 
-  export let data: PageData;
   let currentTuningNotes: INoteItem[];
   currentTuning.subscribe((value) => {
     currentTuningNotes = value;
   });
 
+  export let data: PageData;
   const tunings = JSON.parse(data.tunings);
 </script>
 
