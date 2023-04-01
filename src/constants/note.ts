@@ -1,5 +1,3 @@
-import type { INoteItem } from '../types/note';
-
 export const musicalNotes = [
   'A',
   'A#',

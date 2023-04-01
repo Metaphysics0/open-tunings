@@ -1,6 +1,6 @@
 import { MONGO_CONNECTION_STRING } from '$env/static/private';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { Collection, Db, MongoClient } from 'mongodb';
+import { Collection, MongoClient } from 'mongodb';
 
 export const GET = (async () => {
   const collection = getTuningsCollection();
@@ -10,10 +10,11 @@ export const GET = (async () => {
 }) satisfies RequestHandler;
 
 export const POST = (async ({ request }) => {
+  const collection = getTuningsCollection();
   const requestData = await request.json();
-  console.log('REQUEST data', requestData);
+  const resp = await collection.insertMany(requestData);
 
-  return json({ data: [] });
+  return json({ data: resp });
 }) satisfies RequestHandler;
 
 /* Private */

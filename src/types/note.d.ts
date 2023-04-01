@@ -8,9 +8,11 @@ interface INoteItem {
   octave: IOctave;
 }
 
-interface IUserTuning {
-  name: string;
+interface IUserSubmittedTuning {
+  name?: string;
+  description?: string;
   tags?: string[];
+  urlFriendlyName: string;
   tuning: INoteItem[];
 }
 

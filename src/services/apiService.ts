@@ -1,4 +1,4 @@
-import type { IMusicalNote } from '../types/note';
+import type { IMusicalNote, IUserSubmittedTuning } from '../types/note';
 
 export const apiService = {
   chordFinder: {
@@ -17,11 +17,18 @@ export const apiService = {
         method: 'GET'
       });
     },
-    create(params: unknown) {
+    create(tuning: IUserSubmittedTuning) {
       return make({
         endpoint: 'user-tunings',
         method: 'POST',
-        params
+        params: tuning
+      });
+    },
+    createMany(tunings: IUserSubmittedTuning[]) {
+      return make({
+        endpoint: 'user-tunings',
+        method: 'POST',
+        params: tunings
       });
     }
   }

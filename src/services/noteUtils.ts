@@ -1,10 +1,24 @@
-import { musicalNotes } from '../constants/note';
+import { musicalNotes, musicalOctaves } from '../constants/note';
 import type {
   IMusicalNote,
   INoteItem,
   IOctave,
   IPitchShiftDirection
 } from '../types/note';
+
+export function getTuningNameAsString(tuning: INoteItem[]): string {
+  return tuning.map(Object.values).flat().join('');
+}
+
+export function getTuningFromString(tuningAsString: string): INoteItem[] {
+  const regex = /([A-G](#|b)?)(\d)/g;
+  const matches = tuningAsString.matchAll(regex);
+
+  return Array.from(matches, (match) => ({
+    note: match[1],
+    octave: parseInt(match[3])
+  })) as INoteItem[];
+}
 
 export function pitchShiftNote(
   noteItem: INoteItem,
