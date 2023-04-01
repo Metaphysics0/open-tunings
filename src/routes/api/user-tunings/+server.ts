@@ -6,6 +6,8 @@ export const GET = (async () => {
   const collection = getTuningsCollection();
   const tunings = await collection.find().toArray();
 
+  console.log('TUNINGS', tunings);
+
   return json({ data: tunings });
 }) satisfies RequestHandler;
 

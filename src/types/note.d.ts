@@ -12,7 +12,6 @@ interface IUserSubmittedTuning {
   name?: string;
   description?: string;
   tags?: string[];
-  urlFriendlyName: string;
   tuning: INoteItem[];
 }
 
