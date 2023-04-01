@@ -1,4 +1,4 @@
-import { Sampler, Sequence, start, Transport, Context } from 'tone';
+import { Sampler, Sequence, start, Context } from 'tone';
 import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
 import type { Time } from 'tone/build/esm/core/type/Units';
@@ -39,15 +39,10 @@ class NotePlayer {
   }
 
   playMany(notes: INoteItem[]): void {
-    if (this.getPlayAllNotesSequence === null) return;
-    start();
-    Transport.start();
-    this.getPlayAllNotesSequence(notes)?.start();
-  }
+    if (!this.getPlayAllNotesSequence) return;
 
-  stop(): void {
-    Transport.stop();
-    Transport.cancel();
+    start();
+    this.getPlayAllNotesSequence(notes)?.start();
   }
 
   private getPlayAllNotesSequence(notes: INoteItem[]): Sequence | null {
