@@ -14,7 +14,7 @@
     currentTuningNotes = value;
   });
 
-  function onClick(): void {
+  function pitchShiftNoteEitherUpOrDown(): void {
     const noteToShift = currentTuningNotes[indexOfNoteToPitchShift];
     const pitchShiftedNote = pitchShiftNote(noteToShift, direction);
     const notes = currentTuningNotes.map((note, idx) =>
@@ -25,7 +25,7 @@
   }
 </script>
 
-<button on:click={onClick} class="w-8 h-7 opacity-40">
+<button on:click={pitchShiftNoteEitherUpOrDown} class="w-8 h-7 opacity-40">
   {#if direction === 'up'}
     <FaAngleUp />
   {:else}

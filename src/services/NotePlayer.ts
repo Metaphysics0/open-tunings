@@ -1,10 +1,11 @@
-import { Sampler, Sequence, start, Transport } from 'tone';
+import { Sampler, Sequence, start, Context, Transport } from 'tone';
 import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
 import type { Time } from 'tone/build/esm/core/type/Units';
 
 class NotePlayer {
   sampler: Sampler | null;
+  context: Context | null;
   private readonly duration: string;
   private static readonly NOTES = [
     'A2',
@@ -23,39 +24,36 @@ class NotePlayer {
   ];
   constructor() {
     this.duration = '2s';
-    this.sampler = !browser ? null : this.noteSampler;
+    this.sampler = this.noteSampler;
+    this.context = this.noteContext;
+
+    start();
   }
 
   play(noteItem: INoteItem, durationInMs?: Time): void {
     if (!this.sampler) return;
-    start();
-
     const fullNote = noteItem.note + noteItem.octave;
+
     this.sampler.triggerAttackRelease(fullNote, durationInMs || this.duration);
   }
 
   playMany(notes: INoteItem[]): void {
-    if (!this.sampler) return;
-    start();
     Transport.start();
+    start();
     this.getPlayAllNotesSequence(notes).start();
-  }
-
-  stop(): void {
-    Transport.stop();
-    Transport.cancel();
   }
 
   private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
     return new Sequence({
-      subdivision: '8n',
+      subdivision: '32n',
       loop: false,
       events: notes,
-      callback: (time, note) => this.play(note, '2ms')
+      callback: (time, note) => this.play(note, '3ms')
     });
   }
 
-  private get noteSampler(): Sampler {
+  private get noteSampler(): Sampler | null {
+    if (!browser) return null;
     return new Sampler(
       Object.fromEntries(
         NotePlayer.NOTES.map((note) => [
@@ -70,6 +68,11 @@ class NotePlayer {
       }
     ).toDestination();
   }
+
+  private get noteContext(): Context | null {
+    if (!browser) return null;
+    return new Context({ latencyHint: 'interactive', lookAhead: 0 });
+  }
 }
 
-export const notePlayer = new NotePlayer();
+export const notePlayer = browser && new NotePlayer();

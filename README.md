@@ -6,6 +6,5 @@ AI generated open tunings
 
 - SveleteKit + Typescript
 - UnoCSS (for styles)
-- Chat GPT (for the API)
+- Tone.js (for the tones)
 - Vercel (for deployment)
-- pnpm (package manager)

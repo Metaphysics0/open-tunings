@@ -4,18 +4,39 @@ import type { RequestHandler } from './$types';
 
 export const POST = (async ({ request }) => {
   const requestData = await request.json();
-  const chord = await getChordFromTuning(requestData);
-
-  // return json({ data: tuning });
-  return json(chord[0]);
+  const response = await findChordFromTuning(requestData);
+  const chords = formatChordNameResponse(response);
+  return json(chords[0]);
 }) satisfies RequestHandler;
 
 // ### Private ###
-async function getChordFromTuning(
+async function findChordFromTuning(
   currentTuning: IMusicalNote[]
-): Promise<IChordName[]> {
+): Promise<IChordsLikeResponse[]> {
   const uberChordApiUrl = 'https://api.uberchord.com/v1/chords?nameLike=';
   const tuning = currentTuning.join('');
+
   const chordsLikeResponse = await fetch(uberChordApiUrl + tuning);
   return chordsLikeResponse.json();
 }
+
+function formatChordNameResponse(
+  chords: IChordsLikeResponse[]
+): IChordsLikeResponse[] {
+  return chords.map((chord) => ({
+    ...chord,
+    chordNameAsHtml: _addChordNameAsHtml(chord.chordName)
+  }));
+}
+
+const _addChordNameAsHtml = (chordName: string) => {
+  const notesInChord = chordName.split(',');
+  return notesInChord
+    .map((note, idx) => {
+      if (note !== '' && idx === 2) {
+        return `<sup>${note}</sup>`;
+      }
+      return note;
+    })
+    .join('');
+};

@@ -1,11 +1,18 @@
-import type { musicalNotes } from '../constants/note';
+import type { musicalNotes, musicalOctaves } from '../constants/note';
 
 type IMusicalNote = (typeof musicalNotes)[number];
-type IOctave = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+type IOctave = (typeof musicalOctaves)[number];
 
 interface INoteItem {
   note: IMusicalNote;
   octave: IOctave;
+}
+
+interface IUserSubmittedTuning {
+  name?: string;
+  description?: string;
+  tags?: string[];
+  tuning: INoteItem[];
 }
 
 type IPitchShiftDirection = 'up' | 'down';
