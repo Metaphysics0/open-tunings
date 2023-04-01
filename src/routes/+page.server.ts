@@ -9,4 +9,4 @@ export const load = (async () => {
 }) satisfies PageServerLoad;
 
 /* Private */
-const getCollection = () => mongoClient.db('production').collection('tunings');
+const getCollection = () => mongoClient.collection('tunings');

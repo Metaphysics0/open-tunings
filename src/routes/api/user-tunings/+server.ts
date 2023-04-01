@@ -16,5 +16,4 @@ export const POST = (async ({ request }) => {
 }) satisfies RequestHandler;
 
 /* Private */
-const getTuningsCollection = () =>
-  mongoClient.db('production').collection('tunings');
+const getTuningsCollection = () => mongoClient.collection('tunings');
