@@ -1,13 +1,9 @@
-import { MONGO_CONNECTION_STRING } from '$env/static/private';
 import { json, type RequestHandler } from '@sveltejs/kit';
-import { Collection, MongoClient } from 'mongodb';
+import mongoClient from '$lib/server/mongodb';
 
 export const GET = (async () => {
   const collection = getTuningsCollection();
   const tunings = await collection.find().toArray();
-
-  console.log('TUNINGS', tunings);
-
   return json({ data: tunings });
 }) satisfies RequestHandler;
 
@@ -20,7 +16,5 @@ export const POST = (async ({ request }) => {
 }) satisfies RequestHandler;
 
 /* Private */
-function getTuningsCollection(): Collection {
-  const client = new MongoClient(MONGO_CONNECTION_STRING);
-  return client.db('production').collection('tunings');
-}
+const getTuningsCollection = () =>
+  mongoClient.db('production').collection('tunings');
