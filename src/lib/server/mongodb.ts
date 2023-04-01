@@ -1,4 +1,7 @@
-import { PUBLIC_MONGO_CONNECTION_STRING } from '$env/static/public';
 import { MongoClient } from 'mongodb';
 
-export default new MongoClient(PUBLIC_MONGO_CONNECTION_STRING);
+const mongoClient = new MongoClient(
+  process.env.PUBLIC_MONGO_CONNECTION_STRING ?? ''
+);
+
+export default mongoClient;
