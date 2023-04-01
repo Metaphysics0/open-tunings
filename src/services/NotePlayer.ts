@@ -39,10 +39,10 @@ class NotePlayer {
   }
 
   playMany(notes: INoteItem[]): void {
-    if (!this.sampler) return;
+    if (this.getPlayAllNotesSequence === null) return;
     start();
     Transport.start();
-    this.getPlayAllNotesSequence(notes).start();
+    this.getPlayAllNotesSequence(notes)?.start();
   }
 
   stop(): void {
@@ -50,7 +50,8 @@ class NotePlayer {
     Transport.cancel();
   }
 
-  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
+  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence | null {
+    if (!browser) return null;
     return new Sequence({
       subdivision: '32n',
       loop: false,
