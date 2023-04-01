@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import FaGuitar from 'svelte-icons/fa/FaGuitar.svelte';
   import { notePlayer } from '../services/NotePlayer';
   import { currentTuning } from '../stores';
@@ -11,6 +12,8 @@
   });
 
   function strum(): void {
+    if (!browser) return;
+    // @ts-ignore
     notePlayer.playMany(currentTuningNotes);
   }
 </script>

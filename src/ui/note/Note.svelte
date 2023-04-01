@@ -3,12 +3,15 @@
   import type { INoteItem } from '../../types/note';
   import PitchShiftButton from './PitchShiftButton.svelte';
   import { fade } from 'svelte/transition';
+  import { browser } from '$app/environment';
 
   export let noteItem: INoteItem;
   export let index: number;
   let shouldShowOctave: boolean = false;
 
   function playSingleNote(): void {
+    if (!browser) return;
+    // @ts-ignore
     notePlayer.play(noteItem);
   }
 </script>

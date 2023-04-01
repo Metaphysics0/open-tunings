@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { browser } from '$app/environment';
   import { notePlayer } from '../../services/NotePlayer';
   import { currentTuning } from '../../stores';
   import type { IUserSubmittedTuning } from '../../types/note';
@@ -9,6 +10,8 @@
   export let tuning: IUserSubmittedTuning;
 
   function strum(): void {
+    if (!browser) return;
+    // @ts-ignore
     notePlayer.playMany(tuning.tuning);
   }
 
