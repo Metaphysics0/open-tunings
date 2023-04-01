@@ -13,6 +13,7 @@
 
   function strum(): void {
     if (!browser) return;
+
     // @ts-ignore
     notePlayer.playMany(currentTuningNotes);
   }

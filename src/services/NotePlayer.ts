@@ -1,4 +1,4 @@
-import { Sampler, Sequence, start, Context } from 'tone';
+import { Sampler, Sequence, start, Context, Transport } from 'tone';
 import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
 import type { Time } from 'tone/build/esm/core/type/Units';
@@ -32,21 +32,18 @@ class NotePlayer {
 
   play(noteItem: INoteItem, durationInMs?: Time): void {
     if (!this.sampler) return;
-
     const fullNote = noteItem.note + noteItem.octave;
 
     this.sampler.triggerAttackRelease(fullNote, durationInMs || this.duration);
   }
 
   playMany(notes: INoteItem[]): void {
-    if (!this.getPlayAllNotesSequence) return;
-
+    Transport.start();
     start();
-    this.getPlayAllNotesSequence(notes)?.start();
+    this.getPlayAllNotesSequence(notes).start();
   }
 
-  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence | null {
-    if (!browser) return null;
+  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
     return new Sequence({
       subdivision: '32n',
       loop: false,
