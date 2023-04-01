@@ -6,11 +6,15 @@
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../ui/CurrentTuningName.svelte';
   import TuningsList from '../ui/tunings-list/TuningsList.svelte';
+  import type { PageData } from './$types';
 
+  export let data: PageData;
   let currentTuningNotes: INoteItem[];
   currentTuning.subscribe((value) => {
     currentTuningNotes = value;
   });
+
+  const tunings = JSON.parse(data.tunings);
 </script>
 
 <main class="font-sans flex flex-col items-center mb-9">
@@ -24,4 +28,4 @@
   <PlayAllNotesButton />
 </main>
 
-<TuningsList />
+<TuningsList {tunings} />
