@@ -1,11 +1,11 @@
-import { Sampler, Sequence, start, Transport, Context } from 'tone';
+import Tone from 'tone';
 import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
 import type { Time } from 'tone/build/esm/core/type/Units';
 
 class NotePlayer {
-  sampler: Sampler | null;
-  context: Context | null;
+  sampler: Tone.Sampler | null;
+  context: Tone.Context | null;
   private readonly duration: string;
   private static readonly NOTES = [
     'A2',
@@ -27,7 +27,7 @@ class NotePlayer {
     this.sampler = this.noteSampler;
     this.context = this.noteContext;
 
-    start();
+    Tone.start();
   }
 
   play(noteItem: INoteItem, durationInMs?: Time): void {
@@ -40,18 +40,18 @@ class NotePlayer {
 
   playMany(notes: INoteItem[]): void {
     if (!this.sampler) return;
-    start();
-    Transport.start();
+    Tone.start();
+    Tone.Transport.start();
     this.getPlayAllNotesSequence(notes).start();
   }
 
   stop(): void {
-    Transport.stop();
-    Transport.cancel();
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
   }
 
-  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
-    return new Sequence({
+  private getPlayAllNotesSequence(notes: INoteItem[]): Tone.Sequence {
+    return new Tone.Sequence({
       subdivision: '32n',
       loop: false,
       events: notes,
@@ -59,9 +59,9 @@ class NotePlayer {
     });
   }
 
-  private get noteSampler(): Sampler | null {
+  private get noteSampler(): Tone.Sampler | null {
     if (!browser) return null;
-    return new Sampler(
+    return new Tone.Sampler(
       Object.fromEntries(
         NotePlayer.NOTES.map((note) => [
           note,
@@ -76,9 +76,9 @@ class NotePlayer {
     ).toDestination();
   }
 
-  private get noteContext(): Context | null {
+  private get noteContext(): Tone.Context | null {
     if (!browser) return null;
-    return new Context({ latencyHint: 'interactive', lookAhead: 0 });
+    return new Tone.Context({ latencyHint: 'interactive', lookAhead: 0 });
   }
 }
 
