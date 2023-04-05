@@ -1,9 +1,9 @@
-import { start_mongo } from '$lib/server/mongodb';
+import { start_prisma } from '$lib/server/prisma';
 
-start_mongo()
+start_prisma()
   .then(() => {
-    console.log('Mongo started 🟢');
+    console.log('STARTED PRISMA!!!');
   })
   .catch((e) => {
-    console.error('🔴 Error starting mongo', e);
+    console.error('🔴 Error starting prisma', e);
   });

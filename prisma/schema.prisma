@@ -1,0 +1,23 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGO_CONNECTION_STRING")
+}
+
+model UserSubmittedTuning {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  friendlyName String @unique
+  tags String[] @default([""])
+  description String?
+  likes Int @default(0)
+  tuning Note[]
+}
+
+
+type Note {
+  note String
+  octave Int
+}

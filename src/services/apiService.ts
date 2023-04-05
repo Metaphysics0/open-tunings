@@ -1,3 +1,4 @@
+import type { UserSubmittedTuning } from '@prisma/client';
 import type { IMusicalNote, IUserSubmittedTuning } from '../types/note';
 
 export const apiService = {
@@ -24,7 +25,7 @@ export const apiService = {
         params: tuning
       });
     },
-    createMany(tunings: IUserSubmittedTuning[]) {
+    createMany(tunings: UserSubmittedTuning[]) {
       return make({
         endpoint: 'user-tunings',
         method: 'POST',
