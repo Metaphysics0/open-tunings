@@ -18,7 +18,7 @@ export const apiService = {
         method: 'GET'
       });
     },
-    create(tuning: IUserSubmittedTuning) {
+    create(tuning: UserSubmittedTuning) {
       return make({
         endpoint: 'user-tunings',
         method: 'POST',
@@ -30,6 +30,16 @@ export const apiService = {
         endpoint: 'user-tunings',
         method: 'POST',
         params: tunings
+      });
+    },
+    setLikes(tuningToUpdate: UserSubmittedTuning, likeCount: number) {
+      return make({
+        endpoint: 'user-tunings',
+        method: 'PUT',
+        params: {
+          id: tuningToUpdate.id,
+          likeCount
+        }
       });
     }
   }

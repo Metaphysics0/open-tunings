@@ -1,17 +1,70 @@
-<script>
+<script lang="ts">
   import FaRegHeart from 'svelte-icons/fa/FaRegHeart.svelte';
+  import FaHeart from 'svelte-icons/fa/FaHeart.svelte';
+  import type { UserSubmittedTuning } from '@prisma/client';
+  import { browser } from '$app/environment';
+  import { localStorageKeyForLikedTunings } from '../../constants/user';
+
+  export let tuning: UserSubmittedTuning;
+
+  let likedTunings = browser
+    ? localStorage.getItem(localStorageKeyForLikedTunings)
+    : null;
+
+  function likeTuning() {
+    const currentLikedTunings = likedTunings ? likedTunings.split(',') : [];
+
+    localStorage.setItem(
+      localStorageKeyForLikedTunings,
+      [...currentLikedTunings, tuning.id].join(',')
+    );
+  }
+
+  function unLikeTuning() {
+    const currentLikedTunings = likedTunings ? likedTunings.split(',') : [];
+
+    localStorage.setItem(
+      localStorageKeyForLikedTunings,
+      currentLikedTunings.filter((id) => id !== tuning.id).join(',')
+    );
+  }
+
+  function _hasLikedTuning(): boolean {
+    if (!browser) return false;
+    const likedTunings = localStorage.getItem(localStorageKeyForLikedTunings);
+    if (!likedTunings) return false;
+
+    return !!likedTunings?.split(',')?.find((id) => id === tuning.id);
+  }
+  let hasLiked = _hasLikedTuning();
+
+  function onClick() {
+    if (_hasLikedTuning()) {
+      unLikeTuning();
+      return;
+    }
+
+    likeTuning();
+  }
 </script>
 
-<div class="cool-btn cursor-pointer h-fit w-fit p-2 px-3 items-center">
+<button
+  class="cursor-pointer h-fit w-fit p-2 px-3 items-center"
+  on:click={onClick}
+>
   <span class="h-4 mr-2">
-    <FaRegHeart />
+    {#if hasLiked}
+      <FaHeart />
+    {:else}
+      <FaRegHeart />
+    {/if}
   </span>
-  <span> 0 </span>
-</div>
+  <span>{tuning.likes}</span>
+</button>
 
 <style>
   /* Took from https://www.colorhunt.co */
-  .cool-btn {
+  button {
     background: #fff;
     border: 1px solid #ececec;
     border-radius: 10px;
@@ -27,14 +80,14 @@
     transition: color 0.2s, opacity 0.2s;
   }
 
-  .cool-btn[status='liked'] {
+  button[status='liked'] {
     background-image: linear-gradient(90deg, #f4f4f4 0%, #efefef 100%);
     color: #000;
     opacity: 1;
     border-color: transparent;
   }
 
-  .cool-btn:hover:after {
+  button:hover:after {
     opacity: 0.02;
   }
 </style>

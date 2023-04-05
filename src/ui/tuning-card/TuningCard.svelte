@@ -1,13 +1,13 @@
 <script lang="ts">
   import { browser } from '$app/environment';
+  import type { UserSubmittedTuning } from '@prisma/client';
   import { notePlayer } from '../../services/NotePlayer';
   import { currentTuning, isBrowserMuted } from '../../stores';
-  import type { IUserSubmittedTuning } from '../../types/note';
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
 
-  export let tuning: IUserSubmittedTuning;
+  export let tuning: UserSubmittedTuning;
 
   let hasUserMuted: boolean;
   isBrowserMuted.subscribe((val) => {
@@ -22,6 +22,7 @@
   }
 
   function setCurrentTuning(): void {
+    // @ts-ignore
     currentTuning.set(tuning.tuning);
   }
 
@@ -47,7 +48,7 @@
     </p>
   </article>
   <div class="flex items-center justify-between">
-    <LikeButton />
+    <LikeButton {tuning} />
     <Timestamp />
   </div>
 </div>
