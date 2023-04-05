@@ -9,8 +9,9 @@
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --plugin-search-dir . --check . && eslint .",
+    "format": "prettier --plugin-search-dir . --write .",
     "prisma-migrate": "npx prisma migrate",
-    "format": "prettier --plugin-search-dir . --write ."
+    "prisma-push": "npx prisma db push"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^2.0.0",
