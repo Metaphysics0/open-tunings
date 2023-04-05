@@ -1,7 +1,7 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { notePlayer } from '../../services/NotePlayer';
-  import { currentTuning } from '../../stores';
+  import { currentTuning, isBrowserMuted } from '../../stores';
   import type { IUserSubmittedTuning } from '../../types/note';
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
@@ -9,8 +9,14 @@
 
   export let tuning: IUserSubmittedTuning;
 
+  let hasUserMuted: boolean;
+  isBrowserMuted.subscribe((val) => {
+    hasUserMuted = val;
+  });
+
   function strum(): void {
     if (!browser) return;
+    if (hasUserMuted) return;
     // @ts-ignore
     notePlayer.playMany(tuning.tuning);
   }

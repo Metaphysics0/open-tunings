@@ -2,17 +2,23 @@
   import { browser } from '$app/environment';
   import FaGuitar from 'svelte-icons/fa/FaGuitar.svelte';
   import { notePlayer } from '../services/NotePlayer';
-  import { currentTuning } from '../stores';
+  import { currentTuning, isBrowserMuted } from '../stores';
   import type { INoteItem } from '../types/note';
 
   let currentTuningNotes: INoteItem[];
+  let hasUserMuted: boolean;
 
   currentTuning.subscribe((value) => {
     currentTuningNotes = value;
   });
 
+  isBrowserMuted.subscribe((val) => {
+    hasUserMuted = val;
+  });
+
   function strum(): void {
     if (!browser) return;
+    if (hasUserMuted) return;
 
     // @ts-ignore
     notePlayer.playMany(currentTuningNotes);

@@ -4,13 +4,20 @@
   import PitchShiftButton from './PitchShiftButton.svelte';
   import { fade } from 'svelte/transition';
   import { browser } from '$app/environment';
+  import { isBrowserMuted } from '../../stores';
 
   export let noteItem: INoteItem;
   export let index: number;
   let shouldShowOctave: boolean = false;
 
+  let hasUserMuted: boolean;
+  isBrowserMuted.subscribe((val) => {
+    hasUserMuted = val;
+  });
+
   function playSingleNote(): void {
     if (!browser) return;
+    if (hasUserMuted) return;
     // @ts-ignore
     notePlayer.play(noteItem);
   }
