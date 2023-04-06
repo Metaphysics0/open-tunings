@@ -20,14 +20,13 @@ export const POST = (async ({ request }) => {
 
 /* 'Like' or 'Unlike' Tuning */
 export const PUT = (async ({ request }) => {
-  const requestData = await request.json();
-
+  const { id, likeCount } = await request.json();
   const resp = await prisma.userSubmittedTuning.update({
     where: {
-      id: requestData.get('id')
+      id
     },
     data: {
-      likes: requestData.get('likeCount')
+      likes: likeCount
     }
   });
 

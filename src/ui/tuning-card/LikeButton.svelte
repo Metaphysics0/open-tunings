@@ -4,52 +4,54 @@
   import type { UserSubmittedTuning } from '@prisma/client';
   import { browser } from '$app/environment';
   import { localStorageKeyForLikedTunings } from '../../constants/user';
+  import { likedTunings as likedTuningStore } from '../../stores';
+  import { apiService } from '../../services/apiService';
 
   export let tuning: UserSubmittedTuning;
 
-  let likedTunings = browser
-    ? localStorage.getItem(localStorageKeyForLikedTunings)
-    : null;
+  let likedTunings: string[] = [];
+  let hasLiked: boolean;
 
-  function likeTuning() {
-    const currentLikedTunings = likedTunings ? likedTunings.split(',') : [];
+  likedTuningStore.subscribe((val) => {
+    if (!browser) return;
+    localStorage[localStorageKeyForLikedTunings] = val;
+    likedTunings = val.split(',');
+    hasLiked = !!likedTunings?.find((id) => id === tuning.id);
+  });
 
-    localStorage.setItem(
-      localStorageKeyForLikedTunings,
-      [...currentLikedTunings, tuning.id].join(',')
+  const updateTuning = async (likeCount: number) => {
+    tuning.likes = likeCount;
+    const resp = await apiService.userTunings.setLikes(tuning, likeCount);
+    console.log('RESP', await resp.json());
+  };
+
+  async function likeTuning() {
+    const localStorageValuesToSet =
+      likedTunings.filter(Boolean).length === 0
+        ? [tuning.id]
+        : [...likedTunings, tuning.id];
+
+    likedTuningStore.set(localStorageValuesToSet.join(','));
+    updateTuning(tuning.likes + 1);
+  }
+
+  async function unLikeTuning() {
+    const localStorageValuesToSet = likedTunings.filter(
+      (id) => id !== tuning.id
     );
+    likedTuningStore.set(localStorageValuesToSet.join(','));
+
+    updateTuning(tuning.likes - 1);
   }
 
-  function unLikeTuning() {
-    const currentLikedTunings = likedTunings ? likedTunings.split(',') : [];
-
-    localStorage.setItem(
-      localStorageKeyForLikedTunings,
-      currentLikedTunings.filter((id) => id !== tuning.id).join(',')
-    );
-  }
-
-  function _hasLikedTuning(): boolean {
-    if (!browser) return false;
-    const likedTunings = localStorage.getItem(localStorageKeyForLikedTunings);
-    if (!likedTunings) return false;
-
-    return !!likedTunings?.split(',')?.find((id) => id === tuning.id);
-  }
-  let hasLiked = _hasLikedTuning();
-
-  function onClick() {
-    if (_hasLikedTuning()) {
-      unLikeTuning();
-      return;
-    }
-
-    likeTuning();
+  async function onClick() {
+    hasLiked ? unLikeTuning() : likeTuning();
   }
 </script>
 
 <button
   class="cursor-pointer h-fit w-fit p-2 px-3 items-center"
+  class:liked={hasLiked}
   on:click={onClick}
 >
   <span class="h-4 mr-2">
@@ -80,7 +82,7 @@
     transition: color 0.2s, opacity 0.2s;
   }
 
-  button[status='liked'] {
+  button.liked {
     background-image: linear-gradient(90deg, #f4f4f4 0%, #efefef 100%);
     color: #000;
     opacity: 1;
