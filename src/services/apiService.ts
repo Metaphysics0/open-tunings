@@ -1,5 +1,5 @@
 import type { UserSubmittedTuning } from '@prisma/client';
-import type { IMusicalNote, IUserSubmittedTuning } from '../types/note';
+import type { IMusicalNote } from '../types/note';
 
 export const apiService = {
   chordFinder: {

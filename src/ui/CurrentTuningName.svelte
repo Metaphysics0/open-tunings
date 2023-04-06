@@ -10,9 +10,13 @@
 
   let currentTuningNotes: INoteItem[];
   let currentTuningName: string;
+  let isTuningNameLocallyStored: boolean;
 
   currentTuning.subscribe(async (value) => {
+    // @ts-ignore
     currentTuningNotes = value;
+
+    // @ts-ignore
     currentTuningName = await setCurrentTuningName(value);
   });
 
@@ -25,6 +29,7 @@
       commonOpenTunings.find((openTuning) =>
         areArraysEqual(openTuning.tuning, notes)
       );
+    isTuningNameLocallyStored = !!locallyStoredTuningName;
 
     if (!locallyStoredTuningName) {
       return fetchCurrentTuningName(notes);
@@ -45,6 +50,10 @@
 </script>
 
 <div class="mb-5 mt-2 text-lg">
-  Current tuning:
+  {#if isTuningNameLocallyStored}
+    Current Tuning:
+  {:else}
+    Closest Chord:
+  {/if}
   <span class="font-extrabold">{@html currentTuningName}</span>
 </div>

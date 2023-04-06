@@ -1,4 +1,5 @@
-import type { IMusicalNote, INoteItem } from '../types/note';
+import type { Note } from '@prisma/client';
+import type { IMusicalNote } from '../types/note';
 
 export const commonOpenTunings: IAvailableTuning[] = [
   {
@@ -135,7 +136,7 @@ export const commonOpenTunings: IAvailableTuning[] = [
   }
 ];
 
-export const STANDARD_TUNING: INoteItem[] = [
+export const STANDARD_TUNING: Note[] = [
   {
     note: 'E',
     octave: 2
@@ -162,7 +163,7 @@ export const STANDARD_TUNING: INoteItem[] = [
   }
 ];
 
-export const AMERICAN_FOOTBALL_TUNING: INoteItem[] = [
+export const AMERICAN_FOOTBALL_TUNING: Note[] = [
   {
     note: 'F',
     octave: 2
@@ -189,7 +190,7 @@ export const AMERICAN_FOOTBALL_TUNING: INoteItem[] = [
   }
 ];
 
-export const SUPER_EMO_TUNING: INoteItem[] = [
+export const SUPER_EMO_TUNING: Note[] = [
   {
     note: 'C',
     octave: 2
@@ -216,7 +217,7 @@ export const SUPER_EMO_TUNING: INoteItem[] = [
   }
 ];
 
-export const HELLA_EMO: INoteItem[] = [
+export const HELLA_EMO: Note[] = [
   {
     note: 'C',
     octave: 2
@@ -243,7 +244,7 @@ export const HELLA_EMO: INoteItem[] = [
   }
 ];
 
-export const JUSTIN_PHILLIPS_TYPE_BEAT: INoteItem[] = [
+export const JUSTIN_PHILLIPS_TYPE_BEAT: Note[] = [
   {
     note: 'D',
     octave: 2
@@ -270,7 +271,7 @@ export const JUSTIN_PHILLIPS_TYPE_BEAT: INoteItem[] = [
   }
 ];
 
-export const DADGAD: INoteItem[] = [
+export const DADGAD: Note[] = [
   {
     note: 'D',
     octave: 2
@@ -297,7 +298,7 @@ export const DADGAD: INoteItem[] = [
   }
 ];
 
-export const sampleTunings: INoteItem[][] = [
+export const sampleTunings: Note[][] = [
   AMERICAN_FOOTBALL_TUNING,
   SUPER_EMO_TUNING,
   HELLA_EMO,

@@ -11,6 +11,7 @@
   let currentTuningNotes: INoteItem[];
 
   currentTuning.subscribe((value) => {
+    // @ts-ignore
     currentTuningNotes = value;
   });
 
@@ -25,7 +26,10 @@
   }
 </script>
 
-<button on:click={pitchShiftNoteEitherUpOrDown} class="w-8 h-7 opacity-40">
+<button
+  on:click={pitchShiftNoteEitherUpOrDown}
+  class="sm:w-8 sm:h-7 h-6 w-7 opacity-40"
+>
   {#if direction === 'up'}
     <FaAngleUp />
   {:else}

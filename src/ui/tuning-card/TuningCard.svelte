@@ -22,7 +22,6 @@
   }
 
   function setCurrentTuning(): void {
-    // @ts-ignore
     currentTuning.set(tuning.tuning);
   }
 
@@ -49,6 +48,6 @@
   </article>
   <div class="flex items-center justify-between">
     <LikeButton {tuning} />
-    <Timestamp />
+    <Timestamp {tuning} />
   </div>
 </div>
