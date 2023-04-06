@@ -1,9 +1,8 @@
 <script lang="ts">
   import type { UserSubmittedTuning } from '@prisma/client';
+  import moment from 'moment';
 
   export let tuning: UserSubmittedTuning;
-
-  let timestamp = tuning.createdAt || 'Yesterday';
 </script>
 
-<div class="opacity-70">{timestamp}</div>
+<div class="opacity-70">{moment(tuning.createdAt).fromNow()}</div>
