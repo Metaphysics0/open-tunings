@@ -19,6 +19,21 @@ model UserSubmittedTuning {
 
 
 type Note {
-  note String
+  note NoteValue 
   octave Int
+}
+
+enum NoteValue {
+  A
+  As @map("A#")
+  B
+  C
+  Cs @map("C#")
+  D
+  Ds @map("D#")
+  E
+  F
+  Fs @map("F#")
+  G
+  Gs @map("G#")
 }
