@@ -9,6 +9,7 @@
   let hasUserMuted: boolean;
 
   currentTuning.subscribe((value) => {
+    // @ts-ignore
     currentTuningNotes = value;
   });
 

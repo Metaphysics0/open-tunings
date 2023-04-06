@@ -5,8 +5,10 @@
   import { fade } from 'svelte/transition';
   import { browser } from '$app/environment';
   import { isBrowserMuted } from '../../stores';
+  import type { Note } from '@prisma/client';
 
-  export let noteItem: INoteItem;
+  export let noteItem: Note;
+
   export let index: number;
   let shouldShowOctave: boolean = false;
 

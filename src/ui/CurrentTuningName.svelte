@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { UserSubmittedTuning } from '@prisma/client';
   import {
     commonOpenTunings,
     type IAvailableTuning
@@ -8,20 +9,17 @@
   import type { IMusicalNote, INoteItem } from '../types/note';
   import { areArraysEqual } from '../utils';
 
-  let currentTuningNotes: INoteItem[];
+  let currentTuningNotes: UserSubmittedTuning['tuning'];
   let currentTuningName: string;
   let isTuningNameLocallyStored: boolean;
 
   currentTuning.subscribe(async (value) => {
-    // @ts-ignore
     currentTuningNotes = value;
-
-    // @ts-ignore
     currentTuningName = await setCurrentTuningName(value);
   });
 
   function setCurrentTuningName(
-    currentNotes: INoteItem[]
+    currentNotes: UserSubmittedTuning['tuning']
   ): Promise<string> | string {
     const notes = currentNotes.map((a) => a.note);
 
@@ -32,6 +30,7 @@
     isTuningNameLocallyStored = !!locallyStoredTuningName;
 
     if (!locallyStoredTuningName) {
+      // @ts-ignore
       return fetchCurrentTuningName(notes);
     }
 

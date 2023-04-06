@@ -3,7 +3,6 @@
 
   export let tuning: UserSubmittedTuning;
 
-  // @ts-ignore
   let timestamp = tuning.createdAt || 'Yesterday';
 </script>
 

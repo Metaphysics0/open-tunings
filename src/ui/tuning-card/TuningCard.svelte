@@ -25,16 +25,27 @@
     currentTuning.set(tuning.tuning);
   }
 
-  function strumAndSetCurrentTuning() {
+  function setPathname(): void {
+    if (!browser) return;
+
+    window.history.pushState(
+      'Tuning',
+      tuning.friendlyName,
+      `/tuning/${tuning.friendlyName}`
+    );
+  }
+
+  function onClick() {
     strum();
     setCurrentTuning();
+    setPathname();
   }
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="mx-auto w-5/6 mb-3">
   <article
-    on:click={strumAndSetCurrentTuning}
+    on:click={onClick}
     class="rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md"
   >
     <p class="text-xl font-medium text-gray800 p-4 mb-5 tracking-wide">

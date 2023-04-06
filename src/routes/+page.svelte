@@ -1,14 +1,14 @@
 <script lang="ts">
   import { currentTuning } from '../stores';
-  import type { INoteItem } from '../types/note';
   import Header from '../ui/Header.svelte';
   import Note from '../ui/note/Note.svelte';
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../ui/CurrentTuningName.svelte';
   import TuningsList from '../ui/tunings-list/TuningsList.svelte';
   import type { PageData } from './$types';
+  import type { UserSubmittedTuning } from '@prisma/client';
 
-  let currentTuningNotes: INoteItem[];
+  let currentTuningNotes: UserSubmittedTuning['tuning'];
   currentTuning.subscribe((value) => {
     currentTuningNotes = value;
   });

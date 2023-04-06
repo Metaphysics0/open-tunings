@@ -1,4 +1,4 @@
-import { musicalNotes, musicalOctaves } from '../constants/note';
+import { musicalNotes } from '../constants/note';
 import type {
   IMusicalNote,
   INoteItem,
