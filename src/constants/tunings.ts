@@ -127,7 +127,7 @@ export const commonOpenTunings: IAvailableTuning[] = [
     tuning: ['C', 'G', 'C', 'F', 'C', 'E']
   },
   {
-    name: 'DAD GAD',
+    name: 'DADGAD',
     tuning: ['D', 'A', 'D', 'G', 'A', 'D']
   },
   {

@@ -11,6 +11,8 @@
 
 <style>
   input {
+    text-align: center;
+    outline: none;
     border-bottom: 1px solid black;
   }
 </style>

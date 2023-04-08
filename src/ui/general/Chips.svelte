@@ -1,7 +1,7 @@
 <script lang="ts">
   import { InputChip } from '@skeletonlabs/skeleton';
-  import { transition_in } from 'svelte/internal';
-  let list: string[] = ['foo', 'bar', 'fizz', 'buzz'];
+  export let tags: string[];
+  export let name: string;
 </script>
 
 <svelte:head>
@@ -14,6 +14,10 @@
     }
     .input-chip-interface:hover {
       background: #dde1ee;
+    }
+    .input-chip-interface > form > input {
+      text-align: center;
+      padding: 5px;
     }
     .input-chip-list {
       cursor: pointer;
@@ -32,7 +36,7 @@
   </style>
 </svelte:head>
 
-<InputChip bind:value={list} name="chips" placeholder="Enter some tags!" />
+<InputChip bind:value={tags} {name} placeholder="Enter some tags!" />
 
 <style>
 </style>

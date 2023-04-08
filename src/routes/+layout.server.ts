@@ -1,5 +1,5 @@
 import prisma from '$lib/server/prisma';
-import type { PageServerLoad } from './$types';
+import type { LayoutServerLoad } from './$types';
 
 export const load = (async () => {
   const tunings = await prisma.userSubmittedTuning.findMany({
@@ -9,4 +9,4 @@ export const load = (async () => {
   });
 
   return { tunings: JSON.stringify(tunings) };
-}) satisfies PageServerLoad;
+}) satisfies LayoutServerLoad;

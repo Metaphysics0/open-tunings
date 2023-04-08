@@ -3,7 +3,7 @@
   import FaHeart from 'svelte-icons/fa/FaHeart.svelte';
   import type { UserSubmittedTuning } from '@prisma/client';
   import { browser } from '$app/environment';
-  import { localStorageKeyForLikedTunings } from '../../constants/user';
+  import { localStorageKeyForLikedTunings } from '../../constants/localStorage';
   import { likedTunings as likedTuningStore } from '../../stores';
   import { apiService } from '../../services/apiService';
 
@@ -21,8 +21,7 @@
 
   const updateTuning = async (likeCount: number) => {
     tuning.likes = likeCount;
-    const resp = await apiService.userTunings.setLikes(tuning, likeCount);
-    console.log('RESP', await resp.json());
+    await apiService.userTunings.setLikes(tuning, likeCount);
   };
 
   async function likeTuning() {

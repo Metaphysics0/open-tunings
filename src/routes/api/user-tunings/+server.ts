@@ -5,12 +5,13 @@ import prisma from '$lib/server/prisma';
 
 /* Create tuning */
 export const POST = (async ({ request }) => {
-  const requestData = await request.json();
-  const resp = await prisma.userSubmittedTuning.createMany({
-    data: requestData
+  const data = await request.json();
+
+  const response = await prisma.userSubmittedTuning.create({
+    data
   });
 
-  return json({ data: resp });
+  return json({ data: response });
 }) satisfies RequestHandler;
 
 /* 'Like' or 'Unlike' Tuning */

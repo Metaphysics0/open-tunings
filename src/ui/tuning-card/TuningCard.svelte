@@ -6,6 +6,8 @@
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
+  import { goto } from '$app/navigation';
+  import { page } from '$app/stores';
 
   export let tuning: UserSubmittedTuning;
 
@@ -25,20 +27,22 @@
     currentTuning.set(tuning.tuning);
   }
 
-  function setPathname(): void {
-    if (!browser) return;
+  function pushState(): void {
+    if ($page.url.pathname.includes('/tuning')) {
+      goto(`${tuning.friendlyName}`, {
+        replaceState: true,
+        invalidateAll: true
+      });
+      return;
+    }
 
-    window.history.pushState(
-      'Tuning',
-      tuning.friendlyName,
-      `/tuning/${tuning.friendlyName}`
-    );
+    goto(`tuning/${tuning.friendlyName}`);
   }
 
   function onClick() {
     strum();
     setCurrentTuning();
-    setPathname();
+    pushState();
   }
 </script>
 

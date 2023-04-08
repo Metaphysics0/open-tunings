@@ -27,6 +27,7 @@
 </script>
 
 <button
+  type="button"
   on:click={pitchShiftNoteEitherUpOrDown}
   class="sm:w-8 sm:h-7 h-6 w-7 opacity-40"
 >
