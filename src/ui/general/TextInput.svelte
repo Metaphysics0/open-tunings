@@ -5,14 +5,26 @@
   export let placeholder: string = '';
 
   export let onClick: svelte.JSX.MouseEventHandler<HTMLInputElement> = () => {};
+  export let autofocus: boolean = false;
+  export let label: string;
 </script>
 
-<input type="text" {name} {id} {value} {placeholder} on:click={onClick} />
+<!-- svelte-ignore a11y-autofocus -->
+<label>
+  {label}
+  <input
+    type="text"
+    {name}
+    {id}
+    {value}
+    {placeholder}
+    {autofocus}
+    on:click={onClick}
+  />
+</label>
 
 <style>
   input {
-    text-align: center;
     outline: none;
-    border-bottom: 1px solid black;
   }
 </style>

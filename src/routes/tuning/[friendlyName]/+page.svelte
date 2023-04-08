@@ -17,6 +17,14 @@
   const tunings = JSON.parse(data.tunings);
 </script>
 
+<svelte:head>
+  <title>Open Tunings | {currentTuningNotes.map((n) => n.note).join('')}</title>
+  <meta
+    name="title"
+    content={`Open Tunings | ${currentTuningNotes.map((n) => n.note).join('')}`}
+  />
+</svelte:head>
+
 <main class="font-sans flex flex-col items-center mb-9">
   <Header />
   <CurrentTuningName />

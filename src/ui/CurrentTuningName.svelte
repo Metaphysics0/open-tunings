@@ -6,7 +6,7 @@
   } from '../constants/tunings';
   import { apiService } from '../services/apiService';
   import { currentTuning } from '../stores';
-  import type { IMusicalNote, INoteItem } from '../types/note';
+  import type { IMusicalNote } from '../types/note';
   import { areArraysEqual } from '../utils';
 
   let currentTuningNotes: UserSubmittedTuning['tuning'];
@@ -41,9 +41,10 @@
     try {
       const response = await apiService.chordFinder.find(notes);
       const data: IChordsLikeResponse = await response.json();
-      return data.chordNameAsHtml;
+      return data.chordNameAsHtml ?? 'Unknown!';
     } catch (error) {
-      console.error('Error fetching tuning', error);
+      console.error('Error fetching tuning name', error);
+      return 'Unknown!';
     }
   }
 </script>

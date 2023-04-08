@@ -34,7 +34,7 @@
   <PitchShiftButton direction="up" indexOfNoteToPitchShift={index} />
   <button
     type="button"
-    class="bg-slate-2! rounded-xl p-4 sm:p-5 w-fit flex flex-col cursor-pointer"
+    class="bg-slate-2! rounded-xl p-4 sm:p-5 w-15 flex flex-col items-center justify-center cursor-pointer"
     on:click={playSingleNote}
   >
     <p class="relative text-3xl font-extrabold">

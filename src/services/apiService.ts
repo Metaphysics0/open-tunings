@@ -53,7 +53,7 @@ function make({
   endpoint: string;
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';
   params?: unknown;
-}): Promise<Response> {
+}): Promise<any> {
   return fetch(`/api/${endpoint}`, {
     method,
     headers: {

@@ -1,5 +1,5 @@
 import { writable } from 'svelte/store';
-import { AMERICAN_FOOTBALL_TUNING } from './constants/tunings';
+import { AMERICAN_FOOTBALL_TUNING, STANDARD_TUNING } from './constants/tunings';
 import { browser } from '$app/environment';
 import {
   localStorageKeyForLikedTunings,
@@ -14,6 +14,9 @@ function getInitialCurrentTuning(): Note[] {
   if (window.location.pathname.includes('/tuning')) {
     const tuningFromPath = window.location.pathname.split('/tuning/')[1];
     return getTuningFromString(tuningFromPath);
+  }
+  if (window.location.pathname.includes('/create')) {
+    return STANDARD_TUNING;
   }
   if (localStorage.getItem(localStorageKeyMap.currentTuning)) {
     const locallyStoredTuning = localStorage.getItem(

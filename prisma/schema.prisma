@@ -10,9 +10,9 @@ datasource db {
 model UserSubmittedTuning {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   createdAt DateTime @default(now())
-  friendlyName String @unique
+  tuningName String @unique
+  friendlyName String?
   tags String[] @default([""])
-  description String?
   likes Int @default(0)
   tuning Note[]
 }

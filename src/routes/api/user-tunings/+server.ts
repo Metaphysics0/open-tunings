@@ -1,8 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/server/prisma';
 
-// the get all sits within the initial page load
-
 /* Create tuning */
 export const POST = (async ({ request }) => {
   const data = await request.json();

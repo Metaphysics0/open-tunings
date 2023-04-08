@@ -7,7 +7,7 @@ import type {
   IPitchShiftDirection
 } from '../types/note';
 
-export function getTuningNameAsString(tuning: INoteItem[]): string {
+export function getTuningNameAsString(tuning: Note[]): string {
   return tuning.map(Object.values).flat().join('');
 }
 

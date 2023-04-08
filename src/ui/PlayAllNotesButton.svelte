@@ -9,6 +9,7 @@
   let hasUserMuted: boolean;
 
   export let btnColor: 'red' | 'blue' = 'red';
+  export let asLink: boolean = false;
 
   currentTuning.subscribe((value) => {
     currentTuningNotes = value;
@@ -26,16 +27,14 @@
     notePlayer.playMany(currentTuningNotes);
   }
 
-  // const className =
+  const linkStyle = 'text-blue underline font-extrabold text-lg';
+  const buttonStyle =
+    'w-fit py-2 px-3 bg-blue-500! hover:bg-blue-400! text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer';
 </script>
 
-<button
-  type="button"
-  on:click={strum}
-  class={`w-fit py-2 px-3 bg-blue-500! hover:bg-blue-400! text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer`}
->
+<button type="button" on:click={strum} class={asLink ? linkStyle : buttonStyle}>
   <span class="block h-5 flex">
-    <FaGuitar />
+    <!-- <FaGuitar /> -->
     <span class="ml-1 font-bold tracking-wider">Strum!</span>
   </span>
 </button>

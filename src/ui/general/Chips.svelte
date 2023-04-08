@@ -6,14 +6,20 @@
 
 <svelte:head>
   <style>
+    .input-chip.textarea {
+      width: 100%;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+
     .input-chip-interface {
-      background: #d2d6e3;
+      background: rgb(226, 232, 240);
       padding: 10px;
       transition: all 0.3s ease;
       border-radius: 10px;
     }
     .input-chip-interface:hover {
-      background: #dde1ee;
+      background: rgba(226, 232, 240, 0.8);
     }
     .input-chip-interface > form > input {
       text-align: center;
