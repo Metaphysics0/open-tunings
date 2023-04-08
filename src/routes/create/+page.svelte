@@ -11,6 +11,7 @@
   import TextInput from '../../ui/general/TextInput.svelte';
   import TagsModal from '../../ui/modals/TagsModal.svelte';
   import { browser } from '$app/environment';
+  import Chips from '../../ui/general/Chips.svelte';
 
   let currentTuningNotes: UserSubmittedTuning['tuning'];
   currentTuning.subscribe((value) => {
@@ -30,6 +31,10 @@
     text={'Contribute to the Open Tunings collection!'}
     title={'Create a tuning!'}
   />
+  <div class="mb-2 text-lg">
+    Tuning Name:
+    <TextInput value={name} {name} placeholder="My awesome tuning" />
+  </div>
   <section class="flex mb-3">
     {#each currentTuningNotes as noteItem, index}
       <Note {noteItem} {index} />
@@ -37,21 +42,14 @@
   </section>
   <form>
     <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div class="tags-wrap" on:click={openTagsModal}>
+    <!-- <div class="tags-wrap" on:click={openTagsModal}>
       <Tags bind:tags onlyUnique={true} placeholder={'Add Tags'} />
-    </div>
-    <TextInput value={name} {name} placeholder="Give it a name! (Optional)" />
+    </div> -->
+    <Chips />
 
     <button>Submit!</button>
   </form>
 </main>
-
-{#if browser}
-  <Modals>
-    <!-- svelte-ignore a11y-click-events-have-key-events -->
-    <div slot="backdrop" class="backdrop" on:click={closeModal} />
-  </Modals>
-{/if}
 
 <style>
   form {
