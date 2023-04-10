@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { Prisma, UserSubmittedTuning } from '@prisma/client';
+  import type { UserSubmittedTuning } from '@prisma/client';
 
-  import { currentTuning } from '../../stores';
+  import { currentTuning as currentTuningStore } from '../../stores';
   import Note from '../../ui/note/Note.svelte';
   import Header from '../../ui/Header.svelte';
   import TextInput from '../../ui/general/TextInput.svelte';
@@ -11,9 +11,9 @@
   import { paramSanitizers } from '../../utils';
   import { goto } from '$app/navigation';
 
-  let currentTuningNotes: UserSubmittedTuning['tuning'];
-  currentTuning.subscribe((value) => {
-    currentTuningNotes = value;
+  let currentTuning: UserSubmittedTuning;
+  currentTuningStore.subscribe((value) => {
+    currentTuning = value;
   });
 
   let tags: string[] = [];
@@ -24,7 +24,7 @@
     const formData = new FormData(this);
     const params = paramSanitizers.createUserTuning(
       formData,
-      currentTuningNotes
+      currentTuning.tuning
     );
     try {
       const response = await apiService.userTunings.create(params);
@@ -67,7 +67,7 @@
       />
     </div>
     <section class="flex">
-      {#each currentTuningNotes as noteItem, index}
+      {#each currentTuning.tuning as noteItem, index}
         <Note {noteItem} {index} />
       {/each}
     </section>

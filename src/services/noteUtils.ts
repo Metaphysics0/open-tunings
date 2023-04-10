@@ -2,7 +2,6 @@ import type { Note } from '@prisma/client';
 import { musicalNotes } from '../constants/note';
 import type {
   IMusicalNote,
-  INoteItem,
   IOctave,
   IPitchShiftDirection
 } from '../types/note';
@@ -22,9 +21,9 @@ export function getTuningFromString(tuningAsString: string): Note[] {
 }
 
 export function pitchShiftNote(
-  noteItem: INoteItem,
+  noteItem: Note,
   direction: IPitchShiftDirection
-): INoteItem {
+): Note {
   if (isInvalidInput(noteItem, direction)) return noteItem;
 
   const newNote = getTransposedNote(noteItem, direction);
@@ -34,22 +33,27 @@ export function pitchShiftNote(
 }
 
 const getTransposedNote = (
-  noteItem: INoteItem,
+  noteItem: Note,
   direction: IPitchShiftDirection
 ): IMusicalNote => {
   const { note } = noteItem;
   if (note === 'G#' && direction === 'up') return 'A';
   if (note === 'A' && direction === 'down') return 'G#';
 
+  // TODO:
+  //  We need to soon add enum octaves and note values to the prisma schema
+  //  Apr, 9th, 2023
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const index = musicalNotes.indexOf(note);
   if (direction === 'up') return musicalNotes[index + 1];
   return musicalNotes[index - 1];
 };
 
 const getTransposedOctave = (
-  noteItem: INoteItem,
+  noteItem: Note,
   direction: IPitchShiftDirection
-): IOctave => {
+): Note['octave'] => {
   const { note, octave } = noteItem;
   if (note === 'B' && direction === 'up') {
     return (octave + 1) as IOctave;
@@ -61,7 +65,7 @@ const getTransposedOctave = (
 };
 
 const isInvalidInput = (
-  noteItem: INoteItem,
+  noteItem: Note,
   direction: IPitchShiftDirection
 ): boolean => {
   const { note, octave } = noteItem;

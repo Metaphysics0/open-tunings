@@ -1,28 +1,31 @@
 <script lang="ts">
   import FaAngleUp from 'svelte-icons/fa/FaAngleUp.svelte';
   import FaAngleDown from 'svelte-icons/fa/FaAngleDown.svelte';
-  import { currentTuning } from '../../stores';
-  import type { INoteItem, IPitchShiftDirection } from '../../types/note';
+  import { currentTuning as currentTuningStore } from '../../stores';
+  import type { IPitchShiftDirection } from '../../types/note';
   import { pitchShiftNote } from '../../services/noteUtils';
+  import type { UserSubmittedTuning } from '@prisma/client';
 
   export let direction: IPitchShiftDirection;
   export let indexOfNoteToPitchShift: number;
 
-  let currentTuningNotes: INoteItem[];
+  let currentTuning: UserSubmittedTuning;
 
-  currentTuning.subscribe((value) => {
-    // @ts-ignore
-    currentTuningNotes = value;
+  currentTuningStore.subscribe((value) => {
+    currentTuning = value;
   });
 
   function pitchShiftNoteEitherUpOrDown(): void {
-    const noteToShift = currentTuningNotes[indexOfNoteToPitchShift];
+    const noteToShift = currentTuning.tuning[indexOfNoteToPitchShift];
     const pitchShiftedNote = pitchShiftNote(noteToShift, direction);
-    const notes = currentTuningNotes.map((note, idx) =>
+    const transposedTuning = currentTuning.tuning.map((note, idx) =>
       idx === indexOfNoteToPitchShift ? pitchShiftedNote : note
     );
 
-    currentTuning.set(notes);
+    currentTuningStore.set({
+      ...currentTuning,
+      tuning: transposedTuning
+    });
   }
 </script>
 

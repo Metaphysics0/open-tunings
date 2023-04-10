@@ -2,17 +2,20 @@
   import { browser } from '$app/environment';
   import FaGuitar from 'svelte-icons/fa/FaGuitar.svelte';
   import { notePlayer } from '../services/NotePlayer';
-  import { currentTuning, isBrowserMuted } from '../stores';
-  import type { Note } from '@prisma/client';
+  import {
+    currentTuning as currentTuningStore,
+    isBrowserMuted
+  } from '../stores';
+  import type { UserSubmittedTuning } from '@prisma/client';
 
-  let currentTuningNotes: Note[];
+  let currentTuning: UserSubmittedTuning;
   let hasUserMuted: boolean;
 
   export let btnColor: 'red' | 'blue' = 'red';
   export let asLink: boolean = false;
 
-  currentTuning.subscribe((value) => {
-    currentTuningNotes = value;
+  currentTuningStore.subscribe((value) => {
+    currentTuning = value;
   });
 
   isBrowserMuted.subscribe((val) => {
@@ -23,8 +26,7 @@
     if (!browser) return;
     if (hasUserMuted) return;
 
-    // @ts-ignore
-    notePlayer.playMany(currentTuningNotes);
+    notePlayer.playMany(currentTuning.tuning);
   }
 
   const linkStyle = 'text-blue underline font-extrabold text-lg';

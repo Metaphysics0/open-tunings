@@ -25,7 +25,7 @@
   }
 
   function setCurrentTuning(): void {
-    currentTuning.set(tuning.tuning);
+    currentTuning.set(tuning);
   }
 
   function pushState(): void {

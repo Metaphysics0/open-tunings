@@ -1,7 +1,7 @@
 import { Sampler, Sequence, start, Context, Transport } from 'tone';
-import type { INoteItem } from '../types/note';
 import { browser } from '$app/environment';
 import type { Time } from 'tone/build/esm/core/type/Units';
+import type { Note } from '@prisma/client';
 
 class NotePlayer {
   sampler: Sampler | null;
@@ -30,20 +30,20 @@ class NotePlayer {
     start();
   }
 
-  play(noteItem: INoteItem, durationInMs?: Time): void {
+  play(noteItem: Note, durationInMs?: Time): void {
     if (!this.sampler) return;
     const fullNote = noteItem.note + noteItem.octave;
 
     this.sampler.triggerAttackRelease(fullNote, durationInMs || this.duration);
   }
 
-  playMany(notes: INoteItem[]): void {
+  playMany(notes: Note[]): void {
     Transport.start();
     start();
     this.getPlayAllNotesSequence(notes).start();
   }
 
-  private getPlayAllNotesSequence(notes: INoteItem[]): Sequence {
+  private getPlayAllNotesSequence(notes: Note[]): Sequence {
     return new Sequence({
       subdivision: '32n',
       loop: false,
@@ -75,4 +75,4 @@ class NotePlayer {
   }
 }
 
-export const notePlayer = browser && new NotePlayer();
+export const notePlayer = new NotePlayer();

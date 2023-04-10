@@ -1,5 +1,4 @@
-import type { Note } from '@prisma/client';
-import type { IMusicalNote } from '../types/note';
+import type { Note, UserSubmittedTuning } from '@prisma/client';
 
 export const commonOpenTunings: IAvailableTuning[] = [
   {
@@ -136,59 +135,75 @@ export const commonOpenTunings: IAvailableTuning[] = [
   }
 ];
 
-export const STANDARD_TUNING: Note[] = [
-  {
-    note: 'E',
-    octave: 2
-  },
-  {
-    note: 'A',
-    octave: 2
-  },
-  {
-    note: 'D',
-    octave: 3
-  },
-  {
-    note: 'G',
-    octave: 3
-  },
-  {
-    note: 'B',
-    octave: 3
-  },
-  {
-    note: 'E',
-    octave: 4
-  }
-];
+export const STANDARD_TUNING: UserSubmittedTuning = {
+  id: '0',
+  createdAt: new Date(),
+  tuningName: 'E2A2D3G3B3E4',
+  friendlyName: 'E Standard',
+  tags: [],
+  likes: 0,
+  tuning: [
+    {
+      note: 'E',
+      octave: 2
+    },
+    {
+      note: 'A',
+      octave: 2
+    },
+    {
+      note: 'D',
+      octave: 3
+    },
+    {
+      note: 'G',
+      octave: 3
+    },
+    {
+      note: 'B',
+      octave: 3
+    },
+    {
+      note: 'E',
+      octave: 4
+    }
+  ]
+};
 
-export const AMERICAN_FOOTBALL_TUNING: Note[] = [
-  {
-    note: 'F',
-    octave: 2
-  },
-  {
-    note: 'A',
-    octave: 2
-  },
-  {
-    note: 'C',
-    octave: 3
-  },
-  {
-    note: 'G',
-    octave: 3
-  },
-  {
-    note: 'C',
-    octave: 4
-  },
-  {
-    note: 'E',
-    octave: 4
-  }
-];
+export const AMERICAN_FOOTBALL_TUNING: UserSubmittedTuning = {
+  id: '2',
+  createdAt: new Date(),
+  friendlyName: 'American Football Tuning',
+  tags: [],
+  likes: 0,
+  tuningName: 'F2A2C3G3C4E4',
+  tuning: [
+    {
+      note: 'F',
+      octave: 2
+    },
+    {
+      note: 'A',
+      octave: 2
+    },
+    {
+      note: 'C',
+      octave: 3
+    },
+    {
+      note: 'G',
+      octave: 3
+    },
+    {
+      note: 'C',
+      octave: 4
+    },
+    {
+      note: 'E',
+      octave: 4
+    }
+  ]
+};
 
 export const SUPER_EMO_TUNING: Note[] = [
   {
@@ -299,7 +314,6 @@ export const DADGAD: Note[] = [
 ];
 
 export const sampleTunings: Note[][] = [
-  AMERICAN_FOOTBALL_TUNING,
   SUPER_EMO_TUNING,
   HELLA_EMO,
   JUSTIN_PHILLIPS_TYPE_BEAT,
@@ -307,5 +321,5 @@ export const sampleTunings: Note[][] = [
 ];
 export interface IAvailableTuning {
   name: string;
-  tuning: IMusicalNote[];
+  tuning: Note['note'][];
 }

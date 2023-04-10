@@ -6,33 +6,29 @@ import {
   localStorageKeyForMuteButton,
   localStorageKeyMap
 } from './constants/localStorage';
-import type { Note } from '@prisma/client';
+import type { Note, UserSubmittedTuning } from '@prisma/client';
 import { getTuningFromString } from './services/noteUtils';
 
-function getInitialCurrentTuning(): Note[] {
+function getInitialCurrentTuning(): UserSubmittedTuning {
   if (!browser) return AMERICAN_FOOTBALL_TUNING;
-  if (window.location.pathname.includes('/tuning')) {
-    const tuningFromPath = window.location.pathname.split('/tuning/')[1];
-    return getTuningFromString(tuningFromPath);
-  }
   if (window.location.pathname.includes('/create')) {
     return STANDARD_TUNING;
   }
-  if (localStorage.getItem(localStorageKeyMap.currentTuning)) {
-    const locallyStoredTuning = localStorage.getItem(
-      localStorageKeyMap.currentTuning
-    );
+  // if (localStorage.getItem(localStorageKeyMap.currentTuning)) {
+  //   const locallyStoredTuning = localStorage.getItem(
+  //     localStorageKeyMap.currentTuning
+  //   );
 
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    return getTuningFromString(locallyStoredTuning!);
-  }
+  //   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  //   return getTuningFromString(locallyStoredTuning!);
+  // }
 
   return AMERICAN_FOOTBALL_TUNING;
 }
 export const currentTuning = writable(getInitialCurrentTuning());
 
 export const isBrowserMuted = writable(
-  browser && !!localStorage.getItem(localStorageKeyForMuteButton)
+  browser && localStorage.getItem(localStorageKeyForMuteButton) === 'true'
 );
 
 export const likedTunings = writable(

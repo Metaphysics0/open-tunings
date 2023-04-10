@@ -1,9 +1,8 @@
-import type { Prisma, UserSubmittedTuning } from '@prisma/client';
-import type { IMusicalNote } from '../types/note';
+import type { Note, Prisma, UserSubmittedTuning } from '@prisma/client';
 
 export const apiService = {
   chordFinder: {
-    find(notes: IMusicalNote[]) {
+    find(notes: Note['note'][]) {
       return make({
         endpoint: 'chord-finder',
         method: 'POST',

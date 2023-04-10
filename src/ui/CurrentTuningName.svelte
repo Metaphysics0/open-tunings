@@ -1,43 +1,44 @@
 <script lang="ts">
-  import type { UserSubmittedTuning } from '@prisma/client';
+  import type { Note, UserSubmittedTuning } from '@prisma/client';
   import {
     commonOpenTunings,
     type IAvailableTuning
   } from '../constants/tunings';
   import { apiService } from '../services/apiService';
-  import { currentTuning } from '../stores';
-  import type { IMusicalNote } from '../types/note';
+  import { currentTuning as currentTuningStore } from '../stores';
   import { areArraysEqual } from '../utils';
 
-  let currentTuningNotes: UserSubmittedTuning['tuning'];
   let currentTuningName: string;
-  let isTuningNameLocallyStored: boolean;
+  let currentTuning: UserSubmittedTuning;
+  let hasName: boolean;
 
-  currentTuning.subscribe(async (value) => {
-    currentTuningNotes = value;
+  currentTuningStore.subscribe(async (value) => {
+    currentTuning = value;
     currentTuningName = await setCurrentTuningName(value);
   });
 
   function setCurrentTuningName(
-    currentNotes: UserSubmittedTuning['tuning']
+    currentTuning: UserSubmittedTuning
   ): Promise<string> | string {
-    const notes = currentNotes.map((a) => a.note);
+    if (currentTuning.friendlyName) {
+      hasName = true;
+      return currentTuning.friendlyName;
+    }
+
+    const notes = currentTuning.tuning.map((a) => a.note);
 
     const locallyStoredTuningName: IAvailableTuning | undefined =
       commonOpenTunings.find((openTuning) =>
         areArraysEqual(openTuning.tuning, notes)
       );
-    isTuningNameLocallyStored = !!locallyStoredTuningName;
+    hasName = !!locallyStoredTuningName;
 
-    if (!locallyStoredTuningName) {
-      // @ts-ignore
-      return fetchCurrentTuningName(notes);
-    }
+    if (!locallyStoredTuningName) return fetchCurrentTuningName(notes);
 
     return locallyStoredTuningName.name;
   }
 
-  async function fetchCurrentTuningName(notes: IMusicalNote[]): Promise<any> {
+  async function fetchCurrentTuningName(notes: Note['note'][]): Promise<any> {
     try {
       const response = await apiService.chordFinder.find(notes);
       const data: IChordsLikeResponse = await response.json();
@@ -50,8 +51,8 @@
 </script>
 
 <div class="mb-5 mt-2 text-lg">
-  {#if isTuningNameLocallyStored}
-    Current Tuning:
+  {#if hasName}
+    Tuning Name:
   {:else}
     Closest Chord:
   {/if}

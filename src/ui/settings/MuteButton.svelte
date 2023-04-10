@@ -7,13 +7,13 @@
 
   let hasUserMuted: boolean;
   isBrowserMuted.subscribe((val) => {
-    if (browser) {
-      localStorage[localStorageKeyForMuteButton] = val;
-    }
     hasUserMuted = val;
   });
 
   function onClick() {
+    if (browser) {
+      localStorage[localStorageKeyForMuteButton] = !hasUserMuted;
+    }
     isBrowserMuted.set(!hasUserMuted);
   }
 </script>
