@@ -10,6 +10,7 @@
   import { apiService } from '../../services/apiService';
   import { paramSanitizers } from '../../utils';
   import { goto } from '$app/navigation';
+  import FaRegHeart from 'svelte-icons/fa/FaRegHeart.svelte';
 
   let currentTuning: UserSubmittedTuning;
   currentTuningStore.subscribe((value) => {
@@ -53,19 +54,10 @@
     on:submit|preventDefault={handleSubmit}
   >
     <Header
-      title={'Create a tuning!'}
-      shouldHideSubtext={true}
-      customStyles="mb-4"
+      title="Create a tuning!"
+      text="Contribute to the open tunings collection!"
     />
-    <div class="mb-3 text-lg">
-      <TextInput
-        value={friendlyName}
-        name="friendlyName"
-        placeholder="My awesome tuning"
-        label="Tuning Name:"
-        autofocus
-      />
-    </div>
+    <div class="mb-3" />
     <section class="flex">
       {#each currentTuning.tuning as noteItem, index}
         <Note {noteItem} {index} />

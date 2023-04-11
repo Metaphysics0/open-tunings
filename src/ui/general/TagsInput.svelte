@@ -26,6 +26,11 @@
     .input-chip-interface:hover {
       background: rgba(226, 232, 240, 0.2);
     }
+
+    .input-chip-interface > form {
+      flex: 1;
+    }
+
     .input-chip-interface > form > input {
       text-align: left;
       padding: 5px;
@@ -35,6 +40,8 @@
     /* The list container */
     .input-chip-list {
       margin: 0px 0px 0px 5px !important;
+      max-width: 65%;
+      justify-content: center;
       cursor: default;
     }
 
