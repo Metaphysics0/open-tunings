@@ -5,7 +5,7 @@
   import Note from '../../ui/note/Note.svelte';
   import Header from '../../ui/Header.svelte';
   import TextInput from '../../ui/general/TextInput.svelte';
-  import Chips from '../../ui/general/Chips.svelte';
+  import TagsInput from '../../ui/general/TagsInput.svelte';
   import PlayAllNotesButton from '../../ui/PlayAllNotesButton.svelte';
   import { apiService } from '../../services/apiService';
   import { paramSanitizers } from '../../utils';
@@ -72,8 +72,8 @@
       {/each}
     </section>
     <PlayAllNotesButton asLink={true} />
-    <div class="my-2 w-full">
-      <Chips {tags} name="tags" />
+    <div class="my-2 mt-4 w-full">
+      <TagsInput {tags} name="tags" />
     </div>
     <button
       class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"

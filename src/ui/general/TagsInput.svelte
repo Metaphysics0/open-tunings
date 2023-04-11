@@ -13,36 +13,42 @@
     }
 
     .input-chip-interface {
-      background: rgb(226, 232, 240);
-      padding: 10px;
+      padding: 3px 0px;
       transition: all 0.3s ease;
-      border-radius: 10px;
+      border: 1px solid rgba(226, 232, 240, 1);
+      border-radius: 1000px;
+
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      justify-content: flex-end;
     }
     .input-chip-interface:hover {
-      background: rgba(226, 232, 240, 0.8);
+      background: rgba(226, 232, 240, 0.2);
     }
     .input-chip-interface > form > input {
-      text-align: center;
+      text-align: left;
       padding: 5px;
+      outline: none;
     }
+
+    /* The list container */
     .input-chip-list {
-      cursor: pointer;
+      margin: 0px 0px 0px 5px !important;
+      cursor: default;
     }
+
+    /* The chip item itself */
     .input-chip-list > div > button {
-      background: #272e49;
-      color: #dcdcdc;
+      background: rgba(226, 232, 240, 1);
       padding: 3px 10px;
-      border-radius: 4px;
+      border-radius: 20px;
       transition: all 0.3s ease;
     }
     .input-chip-list > div > button:hover {
-      color: #fff;
-      background: #272e49cb;
+      background: rgb(203 213 225);
     }
   </style>
 </svelte:head>
 
-<InputChip bind:value={tags} {name} placeholder="Enter some tags!" />
-
-<style>
-</style>
+<InputChip bind:value={tags} {name} placeholder="Add Tags" />

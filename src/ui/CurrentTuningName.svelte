@@ -50,11 +50,11 @@
   }
 </script>
 
-<div class="mb-5 mt-2 text-lg">
-  {#if hasName}
+<div class="mb-5 mt-2 text-2xl">
+  <!-- {#if hasName}
     Tuning Name:
   {:else}
     Closest Chord:
-  {/if}
+  {/if} -->
   <span class="font-extrabold">{@html currentTuningName}</span>
 </div>

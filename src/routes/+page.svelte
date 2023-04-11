@@ -18,7 +18,7 @@
 </script>
 
 <main class="font-sans flex flex-col items-center mb-9">
-  <Header />
+  <!-- <Header /> -->
   <CurrentTuningName />
   <section class="flex mb-3">
     {#each currentTuning.tuning as noteItem, index}

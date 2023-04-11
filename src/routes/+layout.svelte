@@ -1,9 +1,17 @@
 <script lang="ts">
-  import 'uno.css';
   import '@unocss/reset/tailwind.css';
-  import MuteButton from '../ui/settings/MuteButton.svelte';
+  import 'uno.css';
+  import Navbar from '../ui/navbar/Navbar.svelte';
 </script>
 
-<MuteButton />
-<div class="mb-5" />
+<Navbar />
 <slot />
+
+<style global>
+  html {
+    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+      'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+  }
+</style>
