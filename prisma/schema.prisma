@@ -12,7 +12,7 @@ model UserSubmittedTuning {
   createdAt DateTime @default(now())
   tuningName String @unique
   friendlyName String?
-  tags String[] @default([""])
+  tags String[] @default([])
   likes Int @default(0)
   tuning Note[]
 }

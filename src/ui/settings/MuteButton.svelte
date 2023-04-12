@@ -18,10 +18,10 @@
   }
 </script>
 
-<button on:click={onClick} class="text-slate-400 w-9 float-right">
+<button on:click={onClick} class="text-xl">
   {#if hasUserMuted}
-    <FaVolumeMute />
+    🔇
   {:else}
-    <FaVolumeUp />
+    🔊
   {/if}
 </button>

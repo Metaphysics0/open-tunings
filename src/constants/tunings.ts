@@ -323,3 +323,40 @@ export interface IAvailableTuning {
   name: string;
   tuning: Note['note'][];
 }
+
+const tuningAdjectives = [
+  'Ethereal',
+  'Powerful',
+  'Ambient',
+  'Emo',
+  'Aggressive',
+  'Melodic',
+  'Soothing',
+  'Experimental',
+  'Funky',
+  'Energetic'
+];
+const tuningNouns = [
+  'Vibes',
+  'Chords',
+  'Tones',
+  'Riffs',
+  'Strings',
+  'Guitars',
+  'Harmonies',
+  'Licks',
+  'Notes',
+  'Frets'
+];
+
+const tuningNamePlaceholders = Array.from({ length: 300 }, () => {
+  const adjective =
+    tuningAdjectives[Math.floor(Math.random() * tuningAdjectives.length)];
+  const noun = tuningNouns[Math.floor(Math.random() * tuningNouns.length)];
+  return `${adjective} ${noun}`;
+});
+
+export const randomTuningNamePlaceholder =
+  tuningNamePlaceholders[
+    Math.floor(Math.random() * tuningNamePlaceholders.length)
+  ];

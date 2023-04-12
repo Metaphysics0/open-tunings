@@ -7,7 +7,7 @@
 <svelte:head>
   <style>
     .input-chip.textarea {
-      width: 100%;
+      width: 50%;
       padding-left: 0 !important;
       padding-right: 0 !important;
     }
@@ -16,12 +16,12 @@
       padding: 3px 0px;
       transition: all 0.3s ease;
       border: 1px solid rgba(226, 232, 240, 1);
-      border-radius: 1000px;
+      border-radius: 0.75rem;
 
-      display: flex;
-      flex-direction: row-reverse;
-      align-items: center;
-      justify-content: flex-end;
+      /* display: flex; */
+      /* flex-direction: row-reverse; */
+      /* align-items: center; */
+      /* justify-content: flex-end; */
     }
     .input-chip-interface:hover {
       background: rgba(226, 232, 240, 0.2);
@@ -39,9 +39,11 @@
 
     /* The list container */
     .input-chip-list {
-      margin: 0px 0px 0px 5px !important;
-      max-width: 65%;
-      justify-content: center;
+      margin-left: 5px;
+      margin-right: 5px;
+      /* margin: 0px 0px 0px 5px !important; */
+      /* max-width: 65%; */
+      /* justify-content: center; */
       cursor: default;
     }
 
@@ -58,4 +60,7 @@
   </style>
 </svelte:head>
 
-<InputChip bind:value={tags} {name} placeholder="Add Tags" />
+<div class="w-full flex items-center justify-between text-lg">
+  Tags:
+  <InputChip bind:value={tags} {name} placeholder="Add Tags" />
+</div>

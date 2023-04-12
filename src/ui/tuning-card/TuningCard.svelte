@@ -7,8 +7,8 @@
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
   import { goto } from '$app/navigation';
-  import { page } from '$app/stores';
   import Tags from './Tags.svelte';
+  import { userSubmittedTuningUtils } from '../../utils';
 
   export let tuning: UserSubmittedTuning;
 
@@ -29,14 +29,10 @@
   }
 
   function pushState(): void {
-    if ($page.url.pathname.includes('/tuning')) {
-      goto(`${tuning.tuningName}`, {
-        replaceState: true
-      });
-      return;
-    }
+    const urlFriendlyTuningName =
+      userSubmittedTuningUtils.formatTuningNameForUrl(tuning.tuningName);
 
-    goto(`tuning/${tuning.tuningName}`);
+    goto(`tuning/${urlFriendlyTuningName}`);
   }
 
   function onClick() {
@@ -53,7 +49,7 @@
     class="rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md"
   >
     {#if tuning.friendlyName}
-      <span class="font-light">"{tuning.friendlyName}"</span>
+      <span class="font-bold">"{tuning.friendlyName}"</span>
     {/if}
     <p class="text-xl font-medium text-gray800 p-4 tracking-wide mb-5">
       {#each tuning.tuning as noteItem}

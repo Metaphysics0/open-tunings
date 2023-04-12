@@ -10,7 +10,7 @@
   import { apiService } from '../../services/apiService';
   import { paramSanitizers } from '../../utils';
   import { goto } from '$app/navigation';
-  import FaRegHeart from 'svelte-icons/fa/FaRegHeart.svelte';
+  import { randomTuningNamePlaceholder } from '../../constants/tunings';
 
   let currentTuning: UserSubmittedTuning;
   currentTuningStore.subscribe((value) => {
@@ -54,17 +54,24 @@
     on:submit|preventDefault={handleSubmit}
   >
     <Header
-      title="Create a tuning!"
+      title="Create a tuning"
       text="Contribute to the open tunings collection!"
     />
-    <div class="mb-3" />
-    <section class="flex">
+    <section class="flex my-2">
       {#each currentTuning.tuning as noteItem, index}
         <Note {noteItem} {index} />
       {/each}
     </section>
     <PlayAllNotesButton asLink={true} />
-    <div class="my-2 mt-4 w-full">
+    <div class="my-5 mt-7 w-full">
+      <TextInput
+        value={friendlyName}
+        name="friendlyName"
+        placeholder={`"${randomTuningNamePlaceholder}"`}
+        label="Tuning Name:"
+      />
+    </div>
+    <div class="w-full mb-2">
       <TagsInput {tags} name="tags" />
     </div>
     <button

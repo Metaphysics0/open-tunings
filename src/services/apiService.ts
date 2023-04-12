@@ -11,10 +11,11 @@ export const apiService = {
     }
   },
   userTunings: {
-    get() {
+    findByTuningName(tuningName: string) {
       return make({
         endpoint: 'user-tunings',
-        method: 'GET'
+        method: 'GET',
+        params: { tuningName }
       });
     },
     create(params: Prisma.UserSubmittedTuningCreateInput) {
@@ -53,11 +54,24 @@ function make({
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS';
   params?: unknown;
 }): Promise<any> {
-  return fetch(`/api/${endpoint}`, {
+  let baseUrl = `/api/${endpoint}`;
+  if (method === 'GET' && params) {
+    // TS-Ignoring here because params are optional for GET routes
+    //
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    baseUrl += '?' + new URLSearchParams(params).toString();
+  }
+
+  const options = {
     method,
     headers: {
       'content-type': 'application/json'
-    },
-    body: params ? JSON.stringify(params) : null
-  });
+    }
+  };
+  const body = method !== 'GET' && params ? JSON.stringify(params) : null;
+
+  console.log('URL WERE FETCHING', baseUrl);
+
+  return fetch(baseUrl, body ? { ...options, body } : options);
 }

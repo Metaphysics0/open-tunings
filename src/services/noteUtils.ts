@@ -10,6 +10,10 @@ export function getTuningNameAsString(tuning: Note[]): string {
   return tuning.map(Object.values).flat().join('');
 }
 
+export function getUrlFriendlyTuningName(tuningAsString: string) {
+  return tuningAsString;
+}
+
 export function getTuningFromString(tuningAsString: string): Note[] {
   const regex = /([A-G](#|b)?)(\d)/g;
   const matches = tuningAsString.matchAll(regex);

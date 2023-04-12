@@ -1,10 +1,10 @@
 <script lang="ts">
   import { notePlayer } from '../../services/NotePlayer';
-  import type { INoteItem } from '../../types/note';
   import PitchShiftButton from './PitchShiftButton.svelte';
   import { fade } from 'svelte/transition';
   import { browser } from '$app/environment';
   import { isBrowserMuted } from '../../stores';
+  import { page } from '$app/stores';
   import type { Note } from '@prisma/client';
 
   export let noteItem: Note;
@@ -31,7 +31,9 @@
   on:focus={() => (shouldShowOctave = true)}
   on:mouseleave={() => (shouldShowOctave = false)}
 >
-  <PitchShiftButton direction="up" indexOfNoteToPitchShift={index} />
+  {#if $page.url.pathname === '/create'}
+    <PitchShiftButton direction="up" indexOfNoteToPitchShift={index} />
+  {/if}
   <button
     type="button"
     class="bg-slate-2! rounded-xl p-4 sm:p-5 w-15 flex flex-col items-center justify-center cursor-pointer"
@@ -46,7 +48,9 @@
       {/if}
     </p>
   </button>
-  <PitchShiftButton direction="down" indexOfNoteToPitchShift={index} />
+  {#if $page.url.pathname === '/create'}
+    <PitchShiftButton direction="down" indexOfNoteToPitchShift={index} />
+  {/if}
 </div>
 
 <style>

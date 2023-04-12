@@ -1,12 +1,28 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/server/prisma';
 
+export const GET = (async ({ request }) => {
+  const requestUrl = new URL(request.url);
+  const tuningName = requestUrl.searchParams.get('tuningName');
+  if (!tuningName) {
+    throw new Error('Unable to find tuning name from request URL');
+  }
+
+  const response = await prisma.userSubmittedTuning.findFirst({
+    where: {
+      tuningName
+    }
+  });
+
+  return json({ data: response });
+}) satisfies RequestHandler;
+
 /* Create tuning */
 export const POST = (async ({ request }) => {
-  const data = await request.json();
+  const requestData = await request.json();
 
   const response = await prisma.userSubmittedTuning.create({
-    data
+    data: requestData
   });
 
   return json({ data: response });
