@@ -44,17 +44,8 @@
     });
   }
 
-  function addCustomValidityMessage() {
-    const input = document.querySelector('[name="Tags"]') as HTMLSelectElement;
-    // const validityState = input.validity;
-    input.setCustomValidity('You gotta fill this out, yo!');
-    // if (validityState.valueMissing) {
-    // }
-  }
-
   onMount(() => {
     addCloseModalEventListener();
-    addCustomValidityMessage();
   });
 </script>
 
@@ -112,10 +103,9 @@
   on:click={openTagsModal}
   on:keydown={(e) => e.key === 'tab' && openTagsModal()}
 >
-  Tags (Max {tagsMaxLength}):
+  Tags:
   <InputChip
     whitelist={AVAILABLE_TAGS}
-    max={tagsMaxLength}
     {required}
     bind:value={tags}
     invalid="bg-red-2 py-.5! rounded-xl"

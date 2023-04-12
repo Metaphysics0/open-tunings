@@ -9,6 +9,7 @@
   import { goto } from '$app/navigation';
   import Tags from './Tags.svelte';
   import { userSubmittedTuningUtils } from '../../utils';
+  import { page } from '$app/stores';
 
   export let tuning: UserSubmittedTuning;
 
@@ -31,6 +32,13 @@
   function pushState(): void {
     const urlFriendlyTuningName =
       userSubmittedTuningUtils.formatTuningNameForUrl(tuning.tuningName);
+
+    if ($page.url.pathname.includes('/tuning')) {
+      goto(urlFriendlyTuningName, {
+        invalidateAll: true
+      });
+      return;
+    }
 
     goto(`tuning/${urlFriendlyTuningName}`);
   }

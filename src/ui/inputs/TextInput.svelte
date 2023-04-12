@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { getRandomTuningName } from '../../constants/tunings';
+
   export let value: string;
   export let name: string;
   export let id: string = 'my-input';
@@ -8,6 +10,10 @@
   export let label: string;
   export let required: boolean = false;
   export let customValidityMessage: string | null = null;
+
+  function randomizeName(): void {
+    value = getRandomTuningName();
+  }
 
   function handleValidity(e: Event): void {
     if (!customValidityMessage) return;
@@ -23,16 +29,23 @@
 
 <label class="flex justify-between text-lg">
   {label}
-  <input
-    class="border-slate-200 border p-2 rounded-xl outline-none w-1/2"
-    type="text"
-    {name}
-    {id}
-    {value}
-    {required}
-    {placeholder}
-    on:input={clearValidationMessage}
-    on:invalid={handleValidity}
-    on:click={onClick}
-  />
+  <div class="w-1/2 relative">
+    <input
+      class="border-slate-200 border p-2 rounded-xl outline-none w-full"
+      type="text"
+      {name}
+      {id}
+      {value}
+      {required}
+      {placeholder}
+      on:input={clearValidationMessage}
+      on:invalid={handleValidity}
+      on:click={onClick}
+    />
+    <button
+      class="absolute right-3 top-2.25 outline-none"
+      type="button"
+      on:click={randomizeName}>🔀</button
+    >
+  </div>
 </label>

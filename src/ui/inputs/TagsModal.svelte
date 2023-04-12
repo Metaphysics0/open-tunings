@@ -18,7 +18,7 @@
   id={idMap.modalWrap}
 >
   <section id={idMap.modalListWrap}>
-    <p class="text-center text-lg font-bold mb-1">Moods</p>
+    <p class="text-center text-lg font-bold mb-1">Available Tags:</p>
     <div class="flex flex-wrap" id={idMap.modalTagItem}>
       {#each moods as mood}
         <button

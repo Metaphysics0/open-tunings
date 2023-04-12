@@ -70,8 +70,5 @@ function make({
     }
   };
   const body = method !== 'GET' && params ? JSON.stringify(params) : null;
-
-  console.log('URL WERE FETCHING', baseUrl);
-
   return fetch(baseUrl, body ? { ...options, body } : options);
 }

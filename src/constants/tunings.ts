@@ -334,7 +334,18 @@ const tuningAdjectives = [
   'Soothing',
   'Experimental',
   'Funky',
-  'Energetic'
+  'Energetic',
+  'Spacey',
+  'Mathmatical',
+  'Algebraic',
+  'Coloquial',
+  'Lyrical',
+  'Dreamy',
+  'Wonderous',
+  'Mysterious',
+  'Convoluted',
+  'Transcendent',
+  'Omnipotent'
 ];
 const tuningNouns = [
   'Vibes',
@@ -349,14 +360,17 @@ const tuningNouns = [
   'Frets'
 ];
 
-const tuningNamePlaceholders = Array.from({ length: 300 }, () => {
-  const adjective =
-    tuningAdjectives[Math.floor(Math.random() * tuningAdjectives.length)];
-  const noun = tuningNouns[Math.floor(Math.random() * tuningNouns.length)];
-  return `${adjective} ${noun}`;
-});
+const tuningNamePlaceholders = Array.from(
+  { length: tuningAdjectives.length * tuningNouns.length },
+  () => {
+    const adjective =
+      tuningAdjectives[Math.floor(Math.random() * tuningAdjectives.length)];
+    const noun = tuningNouns[Math.floor(Math.random() * tuningNouns.length)];
+    return `${adjective} ${noun}`;
+  }
+);
 
-export const randomTuningNamePlaceholder =
+export const getRandomTuningName = () =>
   tuningNamePlaceholders[
     Math.floor(Math.random() * tuningNamePlaceholders.length)
   ];

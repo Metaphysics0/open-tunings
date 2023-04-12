@@ -12,17 +12,10 @@
   import Timestamp from '../../../ui/tuning-card/Timestamp.svelte';
 
   export let data: PageData;
+  const currentTuning = data.currentTuning as UserSubmittedTuning;
+  console.log('CURRENT TUNING', currentTuning);
 
-  let currentTuning: UserSubmittedTuning;
-  currentTuningStore.subscribe((value) => {
-    currentTuning = value;
-  });
-
-  if (data.currentTuning) {
-    currentTuningStore.set(data.currentTuning);
-  }
-
-  const tunings = JSON.parse(data.tunings);
+  const tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
 </script>
 
 <svelte:head>
@@ -44,15 +37,17 @@
   <Tags tuning={currentTuning} bgColor="bg-slate-3" size="lg" />
   <div class="mb-3" />
 
-  <section class="flex mb-3">
+  <section class="flex mb-5">
     {#each currentTuning.tuning as noteItem, index}
       <Note {noteItem} {index} />
     {/each}
   </section>
   <PlayAllNotesButton />
 
-  <div class="flex items-center w-full justify-between">
+  <div class="flex items-center w-full mt-5 justify-between">
     <LikeButton tuning={currentTuning} />
     <Timestamp tuning={currentTuning} />
   </div>
 </main>
+
+<TuningsList {tunings} title="Related Tunings:" />

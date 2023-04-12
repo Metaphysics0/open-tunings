@@ -1,6 +1,5 @@
 <script lang="ts">
   import { currentTuning as currentTuningStore } from '../stores';
-  import Header from '../ui/Header.svelte';
   import Note from '../ui/note/Note.svelte';
   import PlayAllNotesButton from '../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../ui/CurrentTuningName.svelte';

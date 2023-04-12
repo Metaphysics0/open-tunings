@@ -10,7 +10,7 @@
   import { apiService } from '../../services/apiService';
   import { paramSanitizers, userSubmittedTuningUtils } from '../../utils';
   import { goto } from '$app/navigation';
-  import { randomTuningNamePlaceholder } from '../../constants/tunings';
+  import { getRandomTuningName } from '../../constants/tunings';
 
   let currentTuning: UserSubmittedTuning;
   currentTuningStore.subscribe((value) => {
@@ -18,7 +18,7 @@
   });
 
   let tags: string[] = [];
-  let friendlyName: string = randomTuningNamePlaceholder;
+  let friendlyName: string = getRandomTuningName();
 
   async function handleSubmit() {
     // @ts-ignore
@@ -28,6 +28,8 @@
       currentTuning.tuning
     );
     try {
+      console.log('PARAMS', params);
+
       const response = await apiService.userTunings.create(params);
       const { data } = (await response.json()) as { data: UserSubmittedTuning };
 
