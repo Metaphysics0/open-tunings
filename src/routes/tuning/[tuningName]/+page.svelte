@@ -1,13 +1,11 @@
 <script lang="ts">
   import { currentTuning as currentTuningStore } from '../../../stores';
-  import Header from '../../../ui/Header.svelte';
   import Note from '../../../ui/note/Note.svelte';
   import PlayAllNotesButton from '../../../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../../../ui/CurrentTuningName.svelte';
   import TuningsList from '../../../ui/tunings-list/TuningsList.svelte';
   import type { PageData } from './$types';
   import type { UserSubmittedTuning } from '@prisma/client';
-  import { apiService } from '../../../services/apiService';
   import { browser } from '$app/environment';
   import LikeButton from '../../../ui/tuning-card/LikeButton.svelte';
   import Tags from '../../../ui/tuning-card/Tags.svelte';
@@ -24,7 +22,7 @@
     currentTuningStore.set(data.currentTuning);
   }
 
-  // const tunings = JSON.parse(data.tunings);
+  const tunings = JSON.parse(data.tunings);
 </script>
 
 <svelte:head>
@@ -42,7 +40,7 @@
 </svelte:head>
 
 <main class="font-sans flex flex-col items-center mb-9 w-fit mx-auto">
-  <CurrentTuningName />
+  <CurrentTuningName nameFromParentComponent={currentTuning.friendlyName} />
   <Tags tuning={currentTuning} bgColor="bg-slate-3" size="lg" />
   <div class="mb-3" />
 

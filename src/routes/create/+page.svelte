@@ -4,11 +4,11 @@
   import { currentTuning as currentTuningStore } from '../../stores';
   import Note from '../../ui/note/Note.svelte';
   import Header from '../../ui/Header.svelte';
-  import TextInput from '../../ui/general/TextInput.svelte';
-  import TagsInput from '../../ui/general/TagsInput.svelte';
+  import TextInput from '../../ui/inputs/TextInput.svelte';
+  import TagsInput from '../../ui/inputs/TagsInput.svelte';
   import PlayAllNotesButton from '../../ui/PlayAllNotesButton.svelte';
   import { apiService } from '../../services/apiService';
-  import { paramSanitizers } from '../../utils';
+  import { paramSanitizers, userSubmittedTuningUtils } from '../../utils';
   import { goto } from '$app/navigation';
   import { randomTuningNamePlaceholder } from '../../constants/tunings';
 
@@ -18,7 +18,7 @@
   });
 
   let tags: string[] = [];
-  let friendlyName: string = '';
+  let friendlyName: string = randomTuningNamePlaceholder;
 
   async function handleSubmit() {
     // @ts-ignore
@@ -30,7 +30,12 @@
     try {
       const response = await apiService.userTunings.create(params);
       const { data } = (await response.json()) as { data: UserSubmittedTuning };
-      goto(`/tuning/${data.tuningName}`, {
+
+      const url = userSubmittedTuningUtils.formatTuningNameForUrl(
+        data.tuningName
+      );
+
+      goto(`/tuning/${url}`, {
         invalidateAll: true
       });
     } catch (error) {
@@ -66,13 +71,15 @@
     <div class="my-5 mt-7 w-full">
       <TextInput
         value={friendlyName}
+        required={true}
+        customValidityMessage="Give the tuning a name!"
         name="friendlyName"
-        placeholder={`"${randomTuningNamePlaceholder}"`}
+        placeholder="My Awesome Tuning"
         label="Tuning Name:"
       />
     </div>
-    <div class="w-full mb-2">
-      <TagsInput {tags} name="tags" />
+    <div class="w-full mb-2 relative">
+      <TagsInput {tags} required={true} />
     </div>
     <button
       class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"

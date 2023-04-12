@@ -2,6 +2,9 @@
   import type { UserSubmittedTuning } from '@prisma/client';
   import { apiService } from '../services/apiService';
   import { currentTuning as currentTuningStore } from '../stores';
+
+  export let nameFromParentComponent: string | null = null;
+
   let currentTuning: UserSubmittedTuning;
 
   currentTuningStore.subscribe(async (value) => {
@@ -23,9 +26,9 @@
   let closestChordPromise = fetchClosestChord();
 </script>
 
-<div class="mb-5 mt-2 text-2xl">
-  {#if currentTuning.friendlyName}
-    Tuning Name: {currentTuning.friendlyName}
+<div class="mb-3 mt-2 text-2xl">
+  {#if nameFromParentComponent}
+    Tuning Name: {nameFromParentComponent}
   {:else}
     Closest Chord:
     {#await closestChordPromise}

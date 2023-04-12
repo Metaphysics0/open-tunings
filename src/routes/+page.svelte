@@ -7,6 +7,7 @@
   import TuningsList from '../ui/tunings-list/TuningsList.svelte';
   import type { PageData } from './$types';
   import type { UserSubmittedTuning } from '@prisma/client';
+  import Tags from '../ui/tuning-card/Tags.svelte';
 
   let currentTuning: UserSubmittedTuning;
   currentTuningStore.subscribe((value) => {
@@ -14,14 +15,20 @@
   });
 
   export let data: PageData;
-  const tunings = JSON.parse(data.tunings);
+
+  const tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
+  const firstTuning = tunings[0];
 </script>
 
 <main class="font-sans flex flex-col items-center mb-9">
-  <!-- <Header /> -->
-  <CurrentTuningName />
-  <section class="flex mb-3">
-    {#each currentTuning.tuning as noteItem, index}
+  <CurrentTuningName nameFromParentComponent={firstTuning.friendlyName} />
+  <Tags
+    tuning={firstTuning}
+    bgColor="bg-white border-slate-2 border"
+    size="lg"
+  />
+  <section class="flex my-3 mb-4">
+    {#each firstTuning.tuning as noteItem, index}
       <Note {noteItem} {index} />
     {/each}
   </section>
