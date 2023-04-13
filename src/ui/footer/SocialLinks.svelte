@@ -13,7 +13,7 @@
       icon: FaLinkedinIn
     },
     {
-      href: 'https://github.com/Metaphysics0/songsterr-downloader',
+      href: 'https://github.com/Metaphysics0/open-tunings',
       icon: GoMarkGithub
     }
   ];
