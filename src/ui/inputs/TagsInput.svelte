@@ -52,9 +52,8 @@
 <svelte:head>
   <style>
     .input-chip.textarea {
-      width: 50%;
-      padding-left: 0 !important;
-      padding-right: 0 !important;
+      width: 100%;
+      padding: 0 !important;
     }
 
     .input-chip-interface {
@@ -98,19 +97,24 @@
 </svelte:head>
 
 <div
-  class="w-full flex items-center justify-between text-lg"
+  class="w-full flex flex-col items-start justify-between text-lg"
   id={tagIdMap.inputWrap}
   on:click={openTagsModal}
   on:keydown={(e) => e.key === 'tab' && openTagsModal()}
 >
-  Tags:
+  <span class="font-bold">
+    Tags
+    {#if required}
+      <span class="text-red-6">*</span>
+    {/if}
+  </span>
   <InputChip
     whitelist={AVAILABLE_TAGS}
     {required}
     bind:value={tags}
     invalid="bg-red-2 py-.5! rounded-xl"
     name="Tags"
-    placeholder="Add Tags"
+    placeholder="Add Tags (at least 1)"
   />
 </div>
 {#if shouldShowModal}

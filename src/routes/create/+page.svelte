@@ -11,6 +11,7 @@
   import { paramSanitizers, userSubmittedTuningUtils } from '../../utils';
   import { goto } from '$app/navigation';
   import { getRandomTuningName } from '../../constants/tunings';
+  import { toastStore } from '@skeletonlabs/skeleton';
 
   let currentTuning: UserSubmittedTuning;
   currentTuningStore.subscribe((value) => {
@@ -27,11 +28,21 @@
       formData,
       currentTuning.tuning
     );
-    try {
-      console.log('PARAMS', params);
 
+    try {
       const response = await apiService.userTunings.create(params);
-      const { data } = (await response.json()) as { data: UserSubmittedTuning };
+      const { data, error } = (await response.json()) as {
+        data: UserSubmittedTuning;
+        error: any;
+      };
+
+      if (error) {
+        toastStore.trigger({
+          message: error,
+          background: 'bg-amber font-sans font-bold'
+        });
+        return;
+      }
 
       const url = userSubmittedTuningUtils.formatTuningNameForUrl(
         data.tuningName
@@ -77,13 +88,14 @@
         customValidityMessage="Give the tuning a name!"
         name="friendlyName"
         placeholder="My Awesome Tuning"
-        label="Tuning Name:"
+        label="Tuning Name"
       />
     </div>
     <div class="w-full mb-2 relative">
       <TagsInput {tags} required={true} />
     </div>
     <button
+      type="submit"
       class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"
       >Submit!</button
     >

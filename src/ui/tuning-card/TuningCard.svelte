@@ -72,7 +72,11 @@
       <div class="my-2" />
     {/if}
 
-    <Tags {tuning} />
+    <Tags
+      {tuning}
+      wrapperStyles="flex max-w-full overflow-x-scroll"
+      styles="bg-white border-slate-2 border h-min flex min-w-max"
+    />
   </article>
   <div class="flex items-center justify-between">
     <LikeButton {tuning} />

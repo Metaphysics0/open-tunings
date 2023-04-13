@@ -2,16 +2,12 @@
   import '@unocss/reset/tailwind.css';
   import 'uno.css';
   import Navbar from '../ui/navbar/Navbar.svelte';
+  import { Toast } from '@skeletonlabs/skeleton';
+  import Footer from '../ui/footer/Footer.svelte';
 </script>
 
 <Navbar />
+<Toast />
 <slot />
-
-<style global>
-  html {
-    font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-      'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-      'Noto Color Emoji';
-  }
-</style>
+<div class="my-5 py-2" />
+<!-- <Footer /> -->

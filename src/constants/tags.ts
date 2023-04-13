@@ -19,17 +19,17 @@ export const moods = [
   { label: 'fun', emoji: '🤪' }
 ];
 
-export const genres = [
-  { label: 'lofi', emoji: null },
-  { label: 'post-rock', emoji: null },
-  { label: 'metal', emoji: null },
-  { label: 'post-hardcore', emoji: null },
-  { label: 'minor', emoji: null },
-  { label: 'major', emoji: null },
-  { label: 'lydian', emoji: null }
+export const styles = [
+  { label: 'lofi', emoji: '📚' },
+  { label: 'post-rock', emoji: '🪨' },
+  { label: 'metal', emoji: '🤘' },
+  { label: 'post-hardcore', emoji: '🎸' },
+  { label: 'minor', emoji: '😭' },
+  { label: 'major', emoji: '😃' },
+  { label: 'lydian', emoji: '😇' }
 ];
 
-export const AVAILABLE_TAGS: string[] = [...genres, ...moods].map(
+export const AVAILABLE_TAGS: string[] = [...styles, ...moods].map(
   (t) => t.label
 );
 

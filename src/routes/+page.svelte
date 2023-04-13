@@ -19,14 +19,14 @@
   const firstTuning = tunings[0];
 </script>
 
-<main class="font-sans flex flex-col items-center mb-9">
+<main class="font-sans flex flex-col items-center mb-10">
   <CurrentTuningName nameFromParentComponent={firstTuning.friendlyName} />
   <Tags
     tuning={firstTuning}
     bgColor="bg-white border-slate-2 border"
     size="lg"
   />
-  <section class="flex my-3 mb-4">
+  <section class="flex my-6">
     {#each firstTuning.tuning as noteItem, index}
       <Note {noteItem} {index} />
     {/each}

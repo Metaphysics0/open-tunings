@@ -1,6 +1,6 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { moods } from '../../constants/tags';
+  import { moods, styles } from '../../constants/tags';
 
   export let idMap: Record<string, string>;
   export let tags: string[];
@@ -14,25 +14,27 @@
 
 <div
   transition:fade={{ duration: 75 }}
-  class="absolute bg-white shadow-md p-3 rounded-lg right-0 w-3/4"
+  class="absolute bg-white shadow-md p-3 rounded-lg right-0 w-full"
   id={idMap.modalWrap}
 >
   <section id={idMap.modalListWrap}>
-    <p class="text-center text-lg font-bold mb-1">Available Tags:</p>
-    <div class="flex flex-wrap" id={idMap.modalTagItem}>
-      {#each moods as mood}
-        <button
-          id={idMap.modalTagItem}
-          on:click={() => addOrRemoveTag(mood.label)}
-          type="button"
-          class="w-fit bg-white border-slate-2 border cursor-pointer m-1 p-1 px-3 rounded-full hover:bg-slate-2 transition duration-300"
-          class:is-active={tags.includes(mood.label)}
-        >
-          {mood.emoji}
-          {mood.label}
-        </button>
-      {/each}
-    </div>
+    {#each Object.entries({ moods, styles }) as [title, tagList]}
+      <p class="text-center text-lg font-bold mb-1">{title}</p>
+      <div class="flex flex-wrap" id={idMap.modalTagItem}>
+        {#each tagList as tag}
+          <button
+            id={idMap.modalTagItem}
+            on:click={() => addOrRemoveTag(tag.label)}
+            type="button"
+            class="w-fit bg-white border-slate-2 border cursor-pointer m-1 p-1 px-3 rounded-full hover:bg-slate-2 transition duration-300"
+            class:is-active={tags.includes(tag.label)}
+          >
+            {tag.emoji}
+            {tag.label}
+          </button>
+        {/each}
+      </div>
+    {/each}
   </section>
 </div>
 

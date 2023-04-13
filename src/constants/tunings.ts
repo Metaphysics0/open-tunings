@@ -1,4 +1,5 @@
 import type { Note, UserSubmittedTuning } from '@prisma/client';
+import { getRandomElementFromArray } from '../utils';
 
 export const commonOpenTunings: IAvailableTuning[] = [
   {
@@ -345,7 +346,11 @@ const tuningAdjectives = [
   'Mysterious',
   'Convoluted',
   'Transcendent',
-  'Omnipotent'
+  'Omnipotent',
+  'Enigmatic',
+  'Caffinated',
+  'Cocaine',
+  'Psychedelic'
 ];
 const tuningNouns = [
   'Vibes',
@@ -355,6 +360,14 @@ const tuningNouns = [
   'Strings',
   'Guitars',
   'Harmonies',
+  'Sounds',
+  'Melodies',
+  'Soundz',
+  'Riffz',
+  'Arpeggios',
+  'Sweeps',
+  'Taps',
+  'Loops',
   'Licks',
   'Notes',
   'Frets'
@@ -363,14 +376,11 @@ const tuningNouns = [
 const tuningNamePlaceholders = Array.from(
   { length: tuningAdjectives.length * tuningNouns.length },
   () => {
-    const adjective =
-      tuningAdjectives[Math.floor(Math.random() * tuningAdjectives.length)];
-    const noun = tuningNouns[Math.floor(Math.random() * tuningNouns.length)];
+    const adjective = getRandomElementFromArray(tuningAdjectives);
+    const noun = getRandomElementFromArray(tuningNouns);
     return `${adjective} ${noun}`;
   }
 );
 
 export const getRandomTuningName = () =>
-  tuningNamePlaceholders[
-    Math.floor(Math.random() * tuningNamePlaceholders.length)
-  ];
+  getRandomElementFromArray(tuningNamePlaceholders);

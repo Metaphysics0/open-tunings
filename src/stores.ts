@@ -10,8 +10,7 @@ import type { Note, UserSubmittedTuning } from '@prisma/client';
 import { getTuningFromString } from './services/noteUtils';
 
 function getInitialCurrentTuning(): UserSubmittedTuning {
-  if (!browser) return AMERICAN_FOOTBALL_TUNING;
-  if (window.location.pathname.includes('/create')) {
+  if (browser && window.location.pathname.includes('/create')) {
     return STANDARD_TUNING;
   }
   // if (localStorage.getItem(localStorageKeyMap.currentTuning)) {

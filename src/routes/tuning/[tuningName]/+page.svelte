@@ -10,11 +10,10 @@
   import LikeButton from '../../../ui/tuning-card/LikeButton.svelte';
   import Tags from '../../../ui/tuning-card/Tags.svelte';
   import Timestamp from '../../../ui/tuning-card/Timestamp.svelte';
+  import CopyLink from '../../../ui/tuning-card/CopyLinkButton.svelte';
 
   export let data: PageData;
   const currentTuning = data.currentTuning as UserSubmittedTuning;
-  console.log('CURRENT TUNING', currentTuning);
-
   const tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
 </script>
 
@@ -45,7 +44,11 @@
   <PlayAllNotesButton />
 
   <div class="flex items-center w-full mt-5 justify-between">
-    <LikeButton tuning={currentTuning} />
+    <div class="flex items-center">
+      <LikeButton tuning={currentTuning} />
+      <!-- <div class="mr-3.5" />
+      <CopyLink /> -->
+    </div>
     <Timestamp tuning={currentTuning} />
   </div>
 </main>

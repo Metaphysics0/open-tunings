@@ -78,7 +78,11 @@
     justify-content: center;
     position: relative;
     overflow: hidden;
-    transition: color 0.2s, opacity 0.2s;
+    transition: all 0.2s, opacity 0.2s;
+  }
+
+  button:hover {
+    background-image: linear-gradient(90deg, #f4f4f4 0%, #efefef 100%);
   }
 
   button.liked {

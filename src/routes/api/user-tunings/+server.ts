@@ -1,5 +1,6 @@
 import { json, type RequestHandler } from '@sveltejs/kit';
 import prisma from '$lib/server/prisma';
+import { Prisma } from '@prisma/client';
 
 export const GET = (async ({ request }) => {
   const requestUrl = new URL(request.url);
@@ -21,11 +22,26 @@ export const GET = (async ({ request }) => {
 export const POST = (async ({ request }) => {
   const requestData = await request.json();
 
-  const response = await prisma.userSubmittedTuning.create({
-    data: requestData
-  });
+  try {
+    const response = await prisma.userSubmittedTuning.create({
+      data: requestData
+    });
 
-  return json({ data: response });
+    return json({ data: response, error: null });
+  } catch (error) {
+    if (error instanceof Prisma.PrismaClientKnownRequestError) {
+      if (error.code === 'P2002') {
+        console.log(
+          'There is a unique constraint violation, a new tuning cannot be created with this tuning name',
+          error.message
+        );
+      }
+    }
+    return json({
+      data: {},
+      error: 'This tuning already exists!'
+    });
+  }
 }) satisfies RequestHandler;
 
 /* 'Like' or 'Unlike' Tuning */

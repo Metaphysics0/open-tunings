@@ -10,6 +10,10 @@ export function areArraysEqual(a1: unknown[], a2: unknown[]): boolean {
   );
 }
 
+export function getRandomElementFromArray(arr: string[]): string {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
 export const userSubmittedTuningUtils = {
   formatTuningNameForUrl,
   getTuningNameFromUrl
