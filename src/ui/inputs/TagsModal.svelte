@@ -1,10 +1,12 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { moods, styles } from '../../constants/tags';
+  import type { IAvailableTag } from '../../constants/tags';
 
   export let idMap: Record<string, string>;
   export let tags: string[];
   export let tagsMaxLength: number;
+
+  export let values: { moods: IAvailableTag[]; styles: IAvailableTag[] };
 
   const addOrRemoveTag = (tagLabel: string) =>
     !tags.includes(tagLabel) && tags.length !== tagsMaxLength
@@ -13,13 +15,18 @@
 </script>
 
 <div
-  transition:fade={{ duration: 75 }}
+  transition:fade={{ duration: 125 }}
   class="absolute bg-white shadow-md p-3 rounded-lg right-0 w-full"
   id={idMap.modalWrap}
 >
   <section id={idMap.modalListWrap}>
-    {#each Object.entries({ moods, styles }) as [title, tagList]}
-      <p class="text-center text-lg font-bold mb-1">{title}</p>
+    {#if !values.moods.length && !values.styles.length}
+      <p class="text-center text-lg font-bold mb-1">No matching tags 😭</p>
+    {/if}
+    {#each Object.entries(values) as [title, tagList]}
+      {#if tagList.length}
+        <p class="text-center text-lg font-bold mb-1">{title}</p>
+      {/if}
       <div class="flex flex-wrap" id={idMap.modalTagItem}>
         {#each tagList as tag}
           <button

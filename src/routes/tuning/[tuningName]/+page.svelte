@@ -1,5 +1,4 @@
 <script lang="ts">
-  import { currentTuning as currentTuningStore } from '../../../stores';
   import Note from '../../../ui/note/Note.svelte';
   import PlayAllNotesButton from '../../../ui/PlayAllNotesButton.svelte';
   import CurrentTuningName from '../../../ui/CurrentTuningName.svelte';
@@ -14,6 +13,8 @@
 
   export let data: PageData;
   const currentTuning = data.currentTuning as UserSubmittedTuning;
+  console.log('CURRENT TUNING', currentTuning);
+
   const tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
 </script>
 
@@ -53,4 +54,4 @@
   </div>
 </main>
 
-<TuningsList {tunings} title="Related Tunings:" />
+<TuningsList {tunings} title="Similar Tunings:" />

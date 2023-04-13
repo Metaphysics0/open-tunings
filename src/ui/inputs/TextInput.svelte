@@ -49,7 +49,7 @@
       on:click={onClick}
     />
     <button
-      class="absolute right-3 top-2.5 outline-none w-6  opacity-45"
+      class="absolute right-3 top-2.5 outline-none w-6 opacity-45 hover:opacity-65 transition-all duration-1"
       type="button"
       on:click={randomizeName}
     >
@@ -57,3 +57,12 @@
     </button>
   </div>
 </label>
+
+<style>
+  input {
+    transition: all 0.3s ease;
+  }
+  input:hover {
+    background-color: rgba(226, 232, 240, 0.2);
+  }
+</style>

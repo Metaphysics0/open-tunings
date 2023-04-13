@@ -91,13 +91,13 @@
         label="Tuning Name"
       />
     </div>
-    <div class="w-full mb-2 relative">
+    <div class="w-full mb-4 relative">
       <TagsInput {tags} required={true} />
     </div>
     <button
       type="submit"
       class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"
-      >Submit!</button
+      >Create!</button
     >
   </form>
 </main>

@@ -32,7 +32,7 @@
 <button
   type="button"
   on:click={pitchShiftNoteEitherUpOrDown}
-  class="sm:w-8 sm:h-7 h-6 w-7 opacity-40"
+  class="sm:w-8 sm:h-7 h-6 w-7 opacity-45 hover:opacity-65 transition-opacity duration-100"
 >
   {#if direction === 'up'}
     <FaAngleUp />

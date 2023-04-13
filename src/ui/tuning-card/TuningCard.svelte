@@ -40,7 +40,7 @@
       return;
     }
 
-    goto(`tuning/${urlFriendlyTuningName}`);
+    // goto(`tuning/${urlFriendlyTuningName}`);
   }
 
   function onClick() {
@@ -74,6 +74,7 @@
 
     <Tags
       {tuning}
+      withOverflowGradient={true}
       wrapperStyles="flex max-w-full overflow-x-scroll"
       styles="bg-white border-slate-2 border h-min flex min-w-max"
     />

@@ -40,7 +40,8 @@
     );
     likedTuningStore.set(localStorageValuesToSet.join(','));
 
-    updateTuning(tuning.likes - 1);
+    const likeCount = tuning.likes === 0 ? 0 : tuning.likes - 1;
+    updateTuning(likeCount);
   }
 
   async function onClick() {

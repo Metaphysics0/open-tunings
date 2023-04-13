@@ -10,6 +10,9 @@ export function areArraysEqual(a1: unknown[], a2: unknown[]): boolean {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export function _noop(...any: any[]) {}
+
 export function getRandomElementFromArray(arr: string[]): string {
   return arr[Math.floor(Math.random() * arr.length)];
 }

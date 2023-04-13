@@ -1,9 +1,11 @@
 <script lang="ts">
+  import { moods, styles } from '../../constants/tags';
   import { InputChip } from '@skeletonlabs/skeleton';
   import TagsModal from './TagsModal.svelte';
   import { browser } from '$app/environment';
   import { onMount } from 'svelte';
   import { AVAILABLE_TAGS } from '../../constants/tags';
+  import { _noop } from '../../utils';
 
   export let tags: string[];
   export let required: boolean = false;
@@ -47,6 +49,17 @@
   onMount(() => {
     addCloseModalEventListener();
   });
+
+  let tagModalInputValues = { moods, styles };
+  function filterModalInputValues(input: Event) {
+    // @ts-ignore
+    const inputValue = input?.srcElement?.value;
+    // @ts-ignore
+    tagModalInputValues = {
+      moods: moods.filter((i) => i.label.startsWith(inputValue)),
+      styles: styles.filter((i) => i.label.startsWith(inputValue))
+    };
+  }
 </script>
 
 <svelte:head>
@@ -93,9 +106,46 @@
     .input-chip-list > div > button:hover {
       background: rgb(203 213 225);
     }
+
+    .invalid-shake {
+      animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      /* red-400 */
+      border: 1px solid rgb(248 113 113);
+      color: 1px solid rgb(248 113 113);
+      /* red-300 */
+      background-color: rgb(254 242 242);
+      border-radius: 0.75em;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+      perspective: 1000px;
+    }
+
+    @keyframes shake {
+      10%,
+      90% {
+        transform: translate3d(-1px, 0, 0);
+      }
+
+      20%,
+      80% {
+        transform: translate3d(2px, 0, 0);
+      }
+
+      30%,
+      50%,
+      70% {
+        transform: translate3d(-4px, 0, 0);
+      }
+
+      40%,
+      60% {
+        transform: translate3d(4px, 0, 0);
+      }
+    }
   </style>
 </svelte:head>
 
+<!-- svelte-ignore a11y-mouse-events-have-key-events -->
 <div
   class="w-full flex flex-col items-start justify-between text-lg"
   id={tagIdMap.inputWrap}
@@ -110,13 +160,19 @@
   </span>
   <InputChip
     whitelist={AVAILABLE_TAGS}
+    on:input={filterModalInputValues}
     {required}
     bind:value={tags}
-    invalid="bg-red-2 py-.5! rounded-xl"
+    invalid="invalid-shake"
     name="Tags"
     placeholder="Add Tags (at least 1)"
   />
 </div>
 {#if shouldShowModal}
-  <TagsModal {tagsMaxLength} idMap={tagIdMap} bind:tags />
+  <TagsModal
+    values={tagModalInputValues}
+    {tagsMaxLength}
+    idMap={tagIdMap}
+    bind:tags
+  />
 {/if}

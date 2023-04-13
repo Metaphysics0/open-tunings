@@ -5,16 +5,16 @@
 
   const SOCIAL_LINKS: ISocialLink[] = [
     {
-      href: 'https://github.com/Metaphysics0/songsterr-downloader',
-      icon: GoMarkGithub
-    },
-    {
       href: 'https://www.instagram.com/mathrockryan/',
       icon: FaInstagram
     },
     {
       href: 'https://www.linkedin.com/in/ryanroberts0/',
       icon: FaLinkedinIn
+    },
+    {
+      href: 'https://github.com/Metaphysics0/songsterr-downloader',
+      icon: GoMarkGithub
     }
   ];
 
