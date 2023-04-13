@@ -13,6 +13,8 @@
 
   export let tuning: UserSubmittedTuning;
 
+  const isTuningPage = $page.url.pathname.includes('/tuning');
+
   let hasUserMuted: boolean;
   isBrowserMuted.subscribe((val) => {
     hasUserMuted = val;
@@ -30,17 +32,12 @@
   }
 
   function pushState(): void {
-    const urlFriendlyTuningName =
-      userSubmittedTuningUtils.formatTuningNameForUrl(tuning.tuningName);
+    const routePrefix = isTuningPage ? '' : 'tuning/';
+    const tuningPathname = userSubmittedTuningUtils.formatTuningNameForUrl(
+      tuning.tuningName
+    );
 
-    if ($page.url.pathname.includes('/tuning')) {
-      goto(urlFriendlyTuningName, {
-        invalidateAll: true
-      });
-      return;
-    }
-
-    // goto(`tuning/${urlFriendlyTuningName}`);
+    goto(routePrefix + tuningPathname);
   }
 
   function onClick() {

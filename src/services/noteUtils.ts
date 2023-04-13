@@ -14,6 +14,22 @@ export function getUrlFriendlyTuningName(tuningAsString: string) {
   return tuningAsString;
 }
 
+export function getNotesOnlyFromUrlFriendlyTuningName(
+  urlFriendlyTuningName: string | undefined
+): string {
+  if (!urlFriendlyTuningName) return '';
+  return urlFriendlyTuningName.replace(/[0-9]/g, '').replaceAll('s', '#');
+}
+export function getPageTitleFromUrlFriendlyTuningName(
+  urlFriendlyTuningName: string | undefined
+) {
+  if (!urlFriendlyTuningName) return 'Open Tunings';
+  return (
+    'Current Tuning: ' +
+    getNotesOnlyFromUrlFriendlyTuningName(urlFriendlyTuningName)
+  );
+}
+
 export function getTuningFromString(tuningAsString: string): Note[] {
   const regex = /([A-G](#|b)?)(\d)/g;
   const matches = tuningAsString.matchAll(regex);

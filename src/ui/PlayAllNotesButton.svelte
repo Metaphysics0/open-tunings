@@ -1,6 +1,5 @@
 <script lang="ts">
   import { browser } from '$app/environment';
-  import FaGuitar from 'svelte-icons/fa/FaGuitar.svelte';
   import { notePlayer } from '../services/NotePlayer';
   import {
     currentTuning as currentTuningStore,
@@ -11,7 +10,6 @@
   let currentTuning: UserSubmittedTuning;
   let hasUserMuted: boolean;
 
-  export let btnColor: 'red' | 'blue' = 'red';
   export let asLink: boolean = false;
 
   currentTuningStore.subscribe((value) => {
@@ -26,6 +24,7 @@
     if (!browser) return;
     if (hasUserMuted) return;
 
+    // @ts-ignore
     notePlayer.playMany(currentTuning.tuning);
   }
 

@@ -4,6 +4,7 @@ import type { PageServerLoad } from './$types';
 
 export const load = (async ({ url }) => {
   const tuningNameFromUrl = url.pathname.split('/tuning/').at(-1);
+
   const currentTuning = await prisma.userSubmittedTuning.findFirst({
     where: {
       tuningName: userSubmittedTuningUtils.getTuningNameFromUrl(

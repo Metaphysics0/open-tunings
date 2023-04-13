@@ -75,4 +75,4 @@ class NotePlayer {
   }
 }
 
-export const notePlayer = new NotePlayer();
+export const notePlayer = browser && new NotePlayer();

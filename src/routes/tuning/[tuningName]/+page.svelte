@@ -9,26 +9,36 @@
   import LikeButton from '../../../ui/tuning-card/LikeButton.svelte';
   import Tags from '../../../ui/tuning-card/Tags.svelte';
   import Timestamp from '../../../ui/tuning-card/Timestamp.svelte';
-  import CopyLink from '../../../ui/tuning-card/CopyLinkButton.svelte';
+  import {
+    getNotesOnlyFromUrlFriendlyTuningName,
+    getPageTitleFromUrlFriendlyTuningName
+  } from '../../../services/noteUtils';
 
   export let data: PageData;
-  const currentTuning = data.currentTuning as UserSubmittedTuning;
-  console.log('CURRENT TUNING', currentTuning);
 
-  const tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
+  $: currentTuning = data.currentTuning as UserSubmittedTuning;
+  $: tunings = JSON.parse(data.tunings) as UserSubmittedTuning[];
+
+  const tuningNameFromPath = browser
+    ? window.location.href.split('/tuning/').at(-1)
+    : undefined;
 </script>
 
 <svelte:head>
-  <title
-    >Open Tuning: {browser
-      ? window.location.href.split('/tuning/').at(-1)
-      : ''}</title
-  >
+  <title>{getPageTitleFromUrlFriendlyTuningName(tuningNameFromPath)}</title>
   <meta
     name="title"
     content={`Open Tunings | ${currentTuning.tuning
       .map((n) => n.note)
       .join('')}`}
+  />
+
+  <meta
+    name="description"
+    content={'Discover beautiful chord shapes when your guitar is tuned to ' +
+    tuningNameFromPath
+      ? getNotesOnlyFromUrlFriendlyTuningName(tuningNameFromPath)
+      : 'This'}
   />
 </svelte:head>
 
