@@ -49,6 +49,13 @@
   nav {
     transition: all 0.3s ease;
   }
+
+  @media only screen and (max-width: 37.5em) {
+    nav a:last-child {
+      display: none;
+    }
+  }
+
   .with-border {
     border-bottom: 1px solid rgb(203 213 225);
   }

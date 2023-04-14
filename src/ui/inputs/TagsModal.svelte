@@ -15,7 +15,7 @@
 </script>
 
 <div
-  transition:fade={{ duration: 125 }}
+  transition:fade={{ duration: 500 }}
   class="absolute bg-white shadow-md p-3 rounded-lg right-0 w-full"
   id={idMap.modalWrap}
 >

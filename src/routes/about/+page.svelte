@@ -10,7 +10,7 @@
   />
 </svelte:head>
 
-<main class="font-sans w-fit mx-auto">
+<main class="font-sans w-100vw sm:w-fit mx-auto">
   <section
     class="mb-4 flex flex-col items-center max-w-3/4 mx-auto text-center"
   >
