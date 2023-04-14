@@ -11,7 +11,8 @@
   let hasUserMuted: boolean;
 
   export let asLink: boolean = false;
-  export let tuningFromParentComponent: UserSubmittedTuning | undefined;
+  export let tuningFromParentComponent: UserSubmittedTuning | undefined =
+    undefined;
 
   currentTuningStore.subscribe((value) => {
     currentTuning = value;
