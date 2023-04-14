@@ -11,6 +11,8 @@
   let hasUserMuted: boolean;
 
   export let asLink: boolean = false;
+  export let tuningFromParentComponent: UserSubmittedTuning | undefined =
+    undefined;
 
   currentTuningStore.subscribe((value) => {
     currentTuning = value;
@@ -25,7 +27,9 @@
     if (hasUserMuted) return;
 
     // @ts-ignore
-    notePlayer.playMany(currentTuning.tuning);
+    notePlayer.playMany(
+      tuningFromParentComponent?.tuning || currentTuning.tuning
+    );
   }
 
   const linkStyle = 'text-blue underline font-extrabold text-lg';

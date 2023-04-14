@@ -19,7 +19,7 @@
   const firstTuning = tunings[0];
 </script>
 
-<main class="font-sans flex flex-col items-center mb-10">
+<main class="font-sans flex flex-col items-center mb-10 mx-auto sm:w-fit w-max">
   <CurrentTuningName nameFromParentComponent={firstTuning.friendlyName} />
   <Tags
     tuning={firstTuning}
@@ -31,7 +31,7 @@
       <Note {noteItem} {index} />
     {/each}
   </section>
-  <PlayAllNotesButton />
+  <PlayAllNotesButton tuningFromParentComponent={firstTuning} />
 </main>
 
 <TuningsList {tunings} />

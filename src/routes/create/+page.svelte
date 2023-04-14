@@ -92,7 +92,7 @@
       />
     </div>
     <div class="w-full mb-4 relative">
-      <TagsInput {tags} required={true} />
+      <TagsInput {tags} />
     </div>
     <button
       type="submit"

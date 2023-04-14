@@ -4,7 +4,7 @@ import type { LayoutServerLoad } from './$types';
 export const load = (async () => {
   const tunings = await prisma.userSubmittedTuning.findMany({
     orderBy: {
-      createdAt: 'asc'
+      createdAt: 'desc'
     }
   });
 

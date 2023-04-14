@@ -7,6 +7,7 @@ class NotePlayer {
   sampler: Sampler | null;
   context: Context | null;
   private readonly duration: string;
+  private static readonly VOLUME_DECREASE_AMOUNT = -5.5;
   private static readonly NOTES = [
     'A2',
     'A4',
@@ -64,7 +65,8 @@ class NotePlayer {
       {
         onload() {
           console.log('Samples loaded!');
-        }
+        },
+        volume: NotePlayer.VOLUME_DECREASE_AMOUNT
       }
     ).toDestination();
   }
