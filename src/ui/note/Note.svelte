@@ -28,7 +28,7 @@
   {/if}
   <button
     type="button"
-    class="border shadow-sm hover:shadow-md active:shadow-sm transition-all rounded-xl p-3 sm:p-4 w-fit flex flex-col items-center justify-center cursor-pointer"
+    class="border shadow-sm hover:shadow-md active:shadow-sm transition-all rounded-xl py-4 min-w-16.5 flex flex-col items-center justify-center cursor-pointer"
     on:click={playSingleNote}
   >
     <p class="relative sm:text-4xl text-3xl">

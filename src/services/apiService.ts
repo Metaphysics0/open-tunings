@@ -27,21 +27,19 @@ export const apiService = {
     },
     like(tuningToUpdate: UserSubmittedTuning) {
       return make({
-        endpoint: 'user-tunings',
+        endpoint: 'user-tunings/like',
         method: 'PUT',
         params: {
-          id: tuningToUpdate.id,
-          action: 'like'
+          id: tuningToUpdate.id
         }
       });
     },
     unlike(tuningToUpdate: UserSubmittedTuning) {
       return make({
-        endpoint: 'user-tunings',
+        endpoint: 'user-tunings/unlike',
         method: 'PUT',
         params: {
-          id: tuningToUpdate.id,
-          action: 'unlike'
+          id: tuningToUpdate.id
         }
       });
     }

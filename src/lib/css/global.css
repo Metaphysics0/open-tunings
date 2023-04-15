@@ -1,1 +1,7 @@
-/* put custom styles here. */
+@media only screen and (max-width: 37.5em) {
+  /* dont ask */
+  html {
+    width: max-content;
+    margin: 0 auto;
+  }
+}

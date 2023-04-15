@@ -29,17 +29,18 @@ export const POST = (async ({ request }) => {
 
     return json({ data: response, error: null });
   } catch (error) {
+    console.log('Error updating tuning', JSON.stringify(error, null, 2));
     if (error instanceof Prisma.PrismaClientKnownRequestError) {
       if (error.code === 'P2002') {
-        console.log(
-          'There is a unique constraint violation, a new tuning cannot be created with this tuning name',
-          error.message
-        );
+        return json({
+          data: {},
+          error: 'This tuning already exists!'
+        });
       }
     }
     return json({
       data: {},
-      error: 'This tuning already exists!'
+      error: error
     });
   }
 }) satisfies RequestHandler;

@@ -5,13 +5,12 @@
 
   export let tuning: UserSubmittedTuning;
 
+  $: tuningLikeAmount = tuning.likes;
   $: likedTunings = $likedTuningStore?.split(',');
   $: hasLiked = !!likedTunings?.find((id) => id === tuning.id);
 
-  const updateTuning = async (action: 'like' | 'unlike') => {
-    tuning.likes = action === 'like' ? tuning.likes + 1 : tuning.likes - 1;
-    await apiService.userTunings[action](tuning);
-  };
+  const updateTuning = (action: 'like' | 'unlike') =>
+    apiService.userTunings[action](tuning);
 
   async function likeTuning() {
     const localStorageValuesToSet =
@@ -20,6 +19,7 @@
         : [...likedTunings, tuning.id];
 
     likedTuningStore.set(localStorageValuesToSet.join(','));
+    tuningLikeAmount++;
     updateTuning('like');
   }
 
@@ -27,7 +27,10 @@
     const localStorageValuesToSet = likedTunings.filter(
       (id) => id !== tuning.id
     );
+
     likedTuningStore.set(localStorageValuesToSet.join(','));
+
+    tuningLikeAmount--;
     updateTuning('unlike');
   }
 
@@ -48,7 +51,7 @@
       <i class="fa-regular fa-heart" />
     {/if}
   </span>
-  <span>{tuning.likes}</span>
+  <span>{tuningLikeAmount}</span>
 </button>
 
 <style>

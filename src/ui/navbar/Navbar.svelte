@@ -52,7 +52,7 @@
   }
 
   @media only screen and (max-width: 37.5em) {
-    nav a:last-child {
+    nav a:nth-last-child(-n + 2) {
       display: none;
     }
   }

@@ -29,12 +29,12 @@
   async function handleSubmit() {
     // @ts-ignore
     const formData = new FormData(this);
-    const params = paramSanitizers.createUserTuning(
-      formData,
-      currentTuning.tuning
-    );
-
     try {
+      const params = paramSanitizers.createUserTuning(
+        formData,
+        currentTuning.tuning
+      );
+
       const response = await apiService.userTunings.create(params);
       const { data, error } = (await response.json()) as {
         data: UserSubmittedTuning;
@@ -89,7 +89,7 @@
         <Note {noteItem} {index} />
       {/each}
     </section>
-    <PlayAllNotesButton tuning={currentTuning} asLink={true} />
+    <PlayAllNotesButton tuning={currentTuning} />
     <div class="my-5 mt-7 w-full sm:px-0 px-4">
       <div class="mb-4">
         <TextInput
