@@ -8,6 +8,7 @@
     getPageTitleFromUrlFriendlyTuningName
   } from '../../../services/noteUtils';
   import TuningWithName from '../../../ui/sections/TuningWithName.svelte';
+  import Diagram from '../../../ui/chord-diagrams/Diagram.svelte';
 
   export let data: PageData;
 
@@ -39,3 +40,5 @@
 
 <TuningWithName tuning={currentTuning} />
 <TuningsList {tunings} title="Similar Tunings:" />
+
+<Diagram />

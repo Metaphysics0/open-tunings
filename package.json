@@ -41,6 +41,7 @@
     "moment": "^2.29.4",
     "svelte-icons": "^2.1.0",
     "svelte-material-ui": "^7.0.0-beta.3",
+    "svguitar": "^2.2.0",
     "tone": "^14.7.77"
   }
 }
