@@ -1,14 +1,13 @@
 <script lang="ts">
   import { browser } from '$app/environment';
   import { notePlayer } from '../services/NotePlayer';
-  import { isBrowserMuted } from '../stores';
   import type { UserSubmittedTuning } from '@prisma/client';
 
   export let asLink: boolean = false;
   export let tuning: UserSubmittedTuning;
 
   function strum(): void {
-    if (!browser || $isBrowserMuted) return;
+    if (!browser) return;
 
     // @ts-ignore
     notePlayer.playMany(tuning?.tuning);

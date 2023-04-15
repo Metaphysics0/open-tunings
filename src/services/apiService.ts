@@ -25,20 +25,23 @@ export const apiService = {
         params
       });
     },
-    createMany(tunings: UserSubmittedTuning[]) {
-      return make({
-        endpoint: 'user-tunings',
-        method: 'POST',
-        params: tunings
-      });
-    },
-    setLikes(tuningToUpdate: UserSubmittedTuning, likeCount: number) {
+    like(tuningToUpdate: UserSubmittedTuning) {
       return make({
         endpoint: 'user-tunings',
         method: 'PUT',
         params: {
           id: tuningToUpdate.id,
-          likeCount
+          action: 'like'
+        }
+      });
+    },
+    unlike(tuningToUpdate: UserSubmittedTuning) {
+      return make({
+        endpoint: 'user-tunings',
+        method: 'PUT',
+        params: {
+          id: tuningToUpdate.id,
+          action: 'unlike'
         }
       });
     }

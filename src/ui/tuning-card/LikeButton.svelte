@@ -8,9 +8,9 @@
   $: likedTunings = $likedTuningStore?.split(',');
   $: hasLiked = !!likedTunings?.find((id) => id === tuning.id);
 
-  const updateTuning = async (likeCount: number) => {
-    tuning.likes = likeCount;
-    await apiService.userTunings.setLikes(tuning, likeCount);
+  const updateTuning = async (action: 'like' | 'unlike') => {
+    tuning.likes = action === 'like' ? tuning.likes + 1 : tuning.likes - 1;
+    await apiService.userTunings[action](tuning);
   };
 
   async function likeTuning() {
@@ -20,7 +20,7 @@
         : [...likedTunings, tuning.id];
 
     likedTuningStore.set(localStorageValuesToSet.join(','));
-    updateTuning(tuning.likes + 1);
+    updateTuning('like');
   }
 
   async function unLikeTuning() {
@@ -28,9 +28,7 @@
       (id) => id !== tuning.id
     );
     likedTuningStore.set(localStorageValuesToSet.join(','));
-
-    const likeCount = tuning.likes === 0 ? 0 : tuning.likes - 1;
-    updateTuning(likeCount);
+    updateTuning('unlike');
   }
 
   async function onClick() {

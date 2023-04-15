@@ -18,9 +18,13 @@ function getInitialCurrentTuning(): UserSubmittedTuning {
 }
 export const currentTuning = writable(getInitialCurrentTuning());
 
-export const isBrowserMuted: Writable<boolean> = localStorageStore(
+// export const isBrowserMuted = writable(
+//   browser && localStorage.getItem(localStorageKeyForMuteButton) === 'true'
+// );
+
+export const isBrowserMuted: Writable<string> = localStorageStore(
   localStorageKeyMap.hasMuted,
-  (browser && localStorage.getItem(localStorageKeyMap.hasMuted)) === 'true'
+  (browser && localStorage.getItem(localStorageKeyMap.hasMuted)) || ''
 );
 
 export const likedTunings: Writable<string> = localStorageStore(

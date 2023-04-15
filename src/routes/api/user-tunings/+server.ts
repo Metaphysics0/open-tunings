@@ -46,13 +46,21 @@ export const POST = (async ({ request }) => {
 
 /* 'Like' or 'Unlike' Tuning */
 export const PUT = (async ({ request }) => {
-  const { id, likeCount } = await request.json();
+  const availbleActions = ['like', 'unlike'];
+  const { id, action } = await request.json();
+
+  if (!action || !availbleActions.includes(action)) {
+    throw 'Unable to tuning at this time';
+  }
+
   const resp = await prisma.userSubmittedTuning.update({
     where: {
       id
     },
     data: {
-      likes: likeCount
+      likes: {
+        [action === 'like' ? 'increment' : 'decrement']: 1
+      }
     }
   });
 

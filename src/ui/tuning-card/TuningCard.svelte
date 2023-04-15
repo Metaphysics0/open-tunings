@@ -2,7 +2,6 @@
   import { browser } from '$app/environment';
   import type { UserSubmittedTuning } from '@prisma/client';
   import { notePlayer } from '../../services/NotePlayer';
-  import { isBrowserMuted } from '../../stores';
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
@@ -15,14 +14,8 @@
 
   const isTuningPage = $page.url.pathname.includes('/tuning');
 
-  let hasUserMuted: boolean;
-  isBrowserMuted.subscribe((val) => {
-    hasUserMuted = val;
-  });
-
   function strum(): void {
     if (!browser) return;
-    if (hasUserMuted) return;
     // @ts-ignore
     notePlayer.playMany(tuning.tuning);
   }
@@ -43,10 +36,10 @@
 </script>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="mx-auto w-5/6 mb-3">
+<div class="mx-auto w-5/6 mb-3 flex flex-col justify-between">
   <article
     on:click={onClick}
-    class="rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md active:shadow-sm transition-all"
+    class="flex-1 rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md active:shadow-sm transition-all"
   >
     {#if tuning.friendlyName}
       <span class="font-bold text-center">"{tuning.friendlyName}"</span>

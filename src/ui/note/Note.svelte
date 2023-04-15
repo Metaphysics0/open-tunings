@@ -2,7 +2,6 @@
   import { notePlayer } from '../../services/NotePlayer';
   import PitchShiftButton from './PitchShiftButton.svelte';
   import { browser } from '$app/environment';
-  import { isBrowserMuted } from '../../stores';
   import { page } from '$app/stores';
   import type { Note } from '@prisma/client';
 
@@ -12,7 +11,7 @@
   let shouldShowOctave: boolean = false;
 
   function playSingleNote(): void {
-    if (!browser || $isBrowserMuted) return;
+    if (!browser) return;
     // @ts-ignore
     notePlayer.play(noteItem);
   }

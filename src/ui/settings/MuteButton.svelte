@@ -1,4 +1,4 @@
-<script lang="ts">
+<!-- <script lang="ts">
   import { isBrowserMuted } from '../../stores';
   import { localStorageKeyForMuteButton } from '../../constants/localStorage';
   import { browser } from '$app/environment';
@@ -22,4 +22,4 @@
   {:else}
     🔊
   {/if}
-</button>
+</button> -->
