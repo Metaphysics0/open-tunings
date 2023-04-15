@@ -1,6 +1,4 @@
 <script lang="ts">
-  import FaVolumeMute from 'svelte-icons/fa/FaVolumeMute.svelte';
-  import FaVolumeUp from 'svelte-icons/fa/FaVolumeUp.svelte';
   import { isBrowserMuted } from '../../stores';
   import { localStorageKeyForMuteButton } from '../../constants/localStorage';
   import { browser } from '$app/environment';

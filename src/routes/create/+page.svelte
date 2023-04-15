@@ -10,10 +10,15 @@
   import { apiService } from '../../services/apiService';
   import { paramSanitizers, userSubmittedTuningUtils } from '../../utils';
   import { goto } from '$app/navigation';
-  import { getRandomTuningName } from '../../constants/tunings';
+  import {
+    STANDARD_TUNING,
+    getRandomTuningName
+  } from '../../constants/tunings';
   import { toastStore } from '@skeletonlabs/skeleton';
+  import { onMount } from 'svelte';
 
   let currentTuning: UserSubmittedTuning;
+
   currentTuningStore.subscribe((value) => {
     currentTuning = value;
   });
@@ -55,6 +60,10 @@
       console.error('Error creating tuning!', error);
     }
   }
+
+  onMount(() => {
+    currentTuningStore.set(STANDARD_TUNING);
+  });
 </script>
 
 <svelte:head>
@@ -80,25 +89,27 @@
         <Note {noteItem} {index} />
       {/each}
     </section>
-    <PlayAllNotesButton asLink={true} />
-    <div class="my-5 mt-7 w-full">
-      <TextInput
-        value={friendlyName}
-        required={true}
-        customValidityMessage="Give the tuning a name!"
-        name="friendlyName"
-        placeholder="My Awesome Tuning"
-        label="Tuning Name"
-      />
+    <PlayAllNotesButton tuning={currentTuning} asLink={true} />
+    <div class="my-5 mt-7 w-full sm:px-0 px-4">
+      <div class="mb-4">
+        <TextInput
+          value={friendlyName}
+          required={true}
+          customValidityMessage="Give the tuning a name!"
+          name="friendlyName"
+          placeholder="My Awesome Tuning"
+          label="Tuning Name"
+        />
+      </div>
+      <div class="w-full mb-4 relative">
+        <TagsInput {tags} />
+      </div>
+      <button
+        type="submit"
+        class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"
+        >Create!</button
+      >
     </div>
-    <div class="w-full mb-4 relative">
-      <TagsInput {tags} />
-    </div>
-    <button
-      type="submit"
-      class="w-full py-2 px-3 bg-red-500 hover:bg-red-400 text-white font-semibold p-2 rounded-lg shadow-md transition duration-75 cursor-pointer"
-      >Create!</button
-    >
   </form>
 </main>
 

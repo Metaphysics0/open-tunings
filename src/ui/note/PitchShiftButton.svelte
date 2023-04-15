@@ -1,6 +1,4 @@
 <script lang="ts">
-  import FaAngleUp from 'svelte-icons/fa/FaAngleUp.svelte';
-  import FaAngleDown from 'svelte-icons/fa/FaAngleDown.svelte';
   import { currentTuning as currentTuningStore } from '../../stores';
   import type { IPitchShiftDirection } from '../../types/note';
   import { pitchShiftNote } from '../../services/noteUtils';
@@ -32,11 +30,11 @@
 <button
   type="button"
   on:click={pitchShiftNoteEitherUpOrDown}
-  class="sm:w-8 sm:h-7 h-6 w-7 opacity-45 hover:opacity-65 transition-opacity duration-100 touch-manipulation"
+  class="sm:w-8 sm:h-7 text-lg font-bold opacity-45 hover:opacity-65 transition-opacity duration-100 touch-manipulation"
 >
   {#if direction === 'up'}
-    <FaAngleUp />
+    <i class="fa-solid fa-chevron-up" />
   {:else}
-    <FaAngleDown />
+    <i class="fa-solid fa-chevron-down" />
   {/if}
 </button>

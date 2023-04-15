@@ -1,30 +1,26 @@
 <script lang="ts">
-  import GoMarkGithub from 'svelte-icons/go/GoMarkGithub.svelte';
-  import FaInstagram from 'svelte-icons/fa/FaInstagram.svelte';
-  import FaLinkedinIn from 'svelte-icons/fa/FaLinkedinIn.svelte';
-
   const SOCIAL_LINKS: ISocialLink[] = [
     {
       href: 'https://www.instagram.com/mathrockryan/',
-      icon: FaInstagram
+      iconClass: 'fa-instagram'
     },
     {
       href: 'https://www.linkedin.com/in/ryanroberts0/',
-      icon: FaLinkedinIn
+      iconClass: 'fa-linkedin'
     },
     {
       href: 'https://github.com/Metaphysics0/open-tunings',
-      icon: GoMarkGithub
+      iconClass: 'fa-github'
     }
   ];
 
   interface ISocialLink {
     href: string;
-    icon: any;
+    iconClass: string;
   }
 </script>
 
-<section class="flex items-center mx-auto w-fit h-7">
+<section class="flex items-center mx-auto w-fit text-4xl">
   {#each SOCIAL_LINKS as link}
     <a
       href={link.href}
@@ -32,7 +28,7 @@
       rel="noreferrer"
       class="h-full mx-2.5 opacity-50 hover:opacity-100 transition-opacity"
     >
-      <svelte:component this={link.icon} />
+      <i class={'fa-brands ' + link.iconClass} />
     </a>
   {/each}
 </section>

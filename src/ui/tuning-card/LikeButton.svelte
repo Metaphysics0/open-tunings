@@ -1,23 +1,12 @@
 <script lang="ts">
-  import FaRegHeart from 'svelte-icons/fa/FaRegHeart.svelte';
-  import FaHeart from 'svelte-icons/fa/FaHeart.svelte';
   import type { UserSubmittedTuning } from '@prisma/client';
-  import { browser } from '$app/environment';
-  import { localStorageKeyForLikedTunings } from '../../constants/localStorage';
   import { likedTunings as likedTuningStore } from '../../stores';
   import { apiService } from '../../services/apiService';
 
   export let tuning: UserSubmittedTuning;
 
-  let likedTunings: string[] = [];
-  let hasLiked: boolean;
-
-  likedTuningStore.subscribe((val) => {
-    if (!browser) return;
-    localStorage[localStorageKeyForLikedTunings] = val;
-    likedTunings = val.split(',');
-    hasLiked = !!likedTunings?.find((id) => id === tuning.id);
-  });
+  $: likedTunings = $likedTuningStore?.split(',');
+  $: hasLiked = !!likedTunings?.find((id) => id === tuning.id);
 
   const updateTuning = async (likeCount: number) => {
     tuning.likes = likeCount;
@@ -54,11 +43,11 @@
   class:liked={hasLiked}
   on:click={onClick}
 >
-  <span class="h-4 mr-2">
+  <span class="mr-3 text-lg">
     {#if hasLiked}
-      <FaHeart />
+      <i class="fa-solid fa-heart" />
     {:else}
-      <FaRegHeart />
+      <i class="fa-regular fa-heart" />
     {/if}
   </span>
   <span>{tuning.likes}</span>

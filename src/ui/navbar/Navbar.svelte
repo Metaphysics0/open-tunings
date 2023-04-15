@@ -2,6 +2,7 @@
   import CreateButton from './CreateButton.svelte';
   import Logo from './Logo.svelte';
   import { page } from '$app/stores';
+  import { LightSwitch } from '@skeletonlabs/skeleton';
 
   const NAVBAR_LINKS: INavLink[] = [
     {

@@ -1,7 +1,6 @@
 <script lang="ts">
   import { notePlayer } from '../../services/NotePlayer';
   import PitchShiftButton from './PitchShiftButton.svelte';
-  import { fade } from 'svelte/transition';
   import { browser } from '$app/environment';
   import { isBrowserMuted } from '../../stores';
   import { page } from '$app/stores';
@@ -12,14 +11,8 @@
   export let index: number;
   let shouldShowOctave: boolean = false;
 
-  let hasUserMuted: boolean;
-  isBrowserMuted.subscribe((val) => {
-    hasUserMuted = val;
-  });
-
   function playSingleNote(): void {
-    if (!browser) return;
-    if (hasUserMuted) return;
+    if (!browser || $isBrowserMuted) return;
     // @ts-ignore
     notePlayer.play(noteItem);
   }
@@ -36,13 +29,13 @@
   {/if}
   <button
     type="button"
-    class="bg-slate-2! rounded-xl p-4 sm:p-5 sm:w-15 w-fit flex flex-col items-center justify-center cursor-pointer"
+    class="border shadow-sm hover:shadow-md active:shadow-sm transition-all rounded-xl p-3 sm:p-4 w-fit flex flex-col items-center justify-center cursor-pointer"
     on:click={playSingleNote}
   >
-    <p class="relative text-3xl font-extrabold">
+    <p class="relative sm:text-4xl text-3xl">
       {noteItem.note}
       {#if shouldShowOctave}
-        <span class="absolute block opacity-30" transition:fade>
+        <span class="absolute block opacity-30">
           {noteItem.octave}
         </span>
       {/if}

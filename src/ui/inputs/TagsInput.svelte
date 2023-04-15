@@ -165,7 +165,7 @@
     bind:value={tags}
     invalid="invalid-shake"
     name="Tags"
-    placeholder="Add Tags (at least 1)"
+    placeholder="Add Tags"
   />
 </div>
 {#if shouldShowModal}

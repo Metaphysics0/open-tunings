@@ -2,7 +2,7 @@
   import { browser } from '$app/environment';
   import type { UserSubmittedTuning } from '@prisma/client';
   import { notePlayer } from '../../services/NotePlayer';
-  import { currentTuning, isBrowserMuted } from '../../stores';
+  import { isBrowserMuted } from '../../stores';
   import TuningFork from '../icons/TuningFork.svelte';
   import LikeButton from './LikeButton.svelte';
   import Timestamp from './Timestamp.svelte';
@@ -27,10 +27,6 @@
     notePlayer.playMany(tuning.tuning);
   }
 
-  function setCurrentTuning(): void {
-    currentTuning.set(tuning);
-  }
-
   function pushState(): void {
     const routePrefix = isTuningPage ? '' : 'tuning/';
     const tuningPathname = userSubmittedTuningUtils.formatTuningNameForUrl(
@@ -42,7 +38,6 @@
 
   function onClick() {
     strum();
-    setCurrentTuning();
     pushState();
   }
 </script>
@@ -51,10 +46,10 @@
 <div class="mx-auto w-5/6 mb-3">
   <article
     on:click={onClick}
-    class="rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md"
+    class="rounded-lg p-4 border flex flex-col items-center mb-2 cursor-pointer shadow-sm hover:shadow-md active:shadow-sm transition-all"
   >
     {#if tuning.friendlyName}
-      <span class="font-bold">"{tuning.friendlyName}"</span>
+      <span class="font-bold text-center">"{tuning.friendlyName}"</span>
     {/if}
     <p class="text-xl font-medium text-gray800 p-4 tracking-wide mb-5">
       {#each tuning.tuning as noteItem}
@@ -72,7 +67,7 @@
     <Tags
       {tuning}
       withOverflowGradient={true}
-      wrapperStyles="flex max-w-full overflow-x-scroll"
+      wrapperStyles="flex max-w-full overflow-x-auto"
       styles="bg-white border-slate-2 border h-min flex min-w-max"
     />
   </article>
